@@ -1,8 +1,8 @@
 {
-  "name": "@irisnet/irishub-sdk",
+  "name": "@irisnet/gaia-sdk",
   "version": "0.0.1",
-  "description": "IRISHub JavaScript SDK",
-  "main": "src/index.js",
+  "description": "gaia JavaScript SDK",
+  "main": "./dist/src",
   "typings": "src/index.ts",
   "types": "./dist/src",
   "files": [
@@ -20,9 +20,11 @@
   "license": "Apache-2.0",
   "keywords": [
     "irishub",
-    "irishub-sdk",
     "irisnet",
-    "cosmos"
+    "gaia",
+    "gaia-sdk",
+    "cosmos",
+    "cosmoshub"
   ],
   "scripts": {
     "node": "cd test/scripts/ && sh build.sh && sh start.sh",
@@ -31,7 +33,7 @@
     "clean": "gts clean",
     "build": "rm -rf dist/* && tsc --emitDeclarationOnly && babel --extensions '.ts' src -d dist/src && cp LICENSE dist/ && cp README.md dist/ && cp package.json dist/ && cp -rf src/types/proto-types dist/src/types/proto-types",
     "fix": "gts fix",
-    "docs": "npx typedoc && docker build -t irisnet/docs-irishub-sdk-js .",
+    "docs": "npx typedoc && docker build -t irisnet/docs-gaia-sdk-js .",
     "proto-gen": "sh ./scripts/protocgen.sh"
   },
   "devDependencies": {
@@ -74,6 +76,6 @@
     "secp256k1": "^3.7.1",
     "secure-random": "^1.1.2",
     "sha256": "^0.2.0",
-    "sm-crypto": "git+https://github.com/hangts/sm-crypto.git"
+    "sm-crypto": "git+https://github.com/bianjieai/sm-crypto-js.git#main"
   }
 }

@@ -1,6 +1,5 @@
 import { Client } from '../client';
 import * as types from '../types';
-import { CommunityTaxUsageType } from '../types/gov';
 /**
  * This module provides governance functionalities
  *
@@ -80,7 +79,6 @@ export declare class Gov {
      * @returns
      * @since v0.17
      */
-    submitParameterChangeProposal(title: string, description: string, initialDeposit: types.Coin[], params: types.ChangeParameter[], baseTx: types.BaseTx): Promise<types.TxResult>;
     /**
      * Submit a PlainTextProposal along with an initial deposit
      *
@@ -93,7 +91,6 @@ export declare class Gov {
      * @returns
      * @since v0.17
      */
-    submitPlainTextProposal(title: string, description: string, initialDeposit: types.Coin[], baseTx: types.BaseTx): Promise<types.TxResult>;
     /**
      * Submit a CommunityTaxUsageProposal along with an initial deposit
      *
@@ -111,7 +108,6 @@ export declare class Gov {
      * @param baseTx
      * @since v0.17
      */
-    submitCommunityTaxUsageProposal(title: string, description: string, initialDeposit: types.Coin[], usage: CommunityTaxUsageType, destAddress: string, percent: number, baseTx: types.BaseTx): Promise<types.TxResult>;
     /**
      * Deposit tokens for an active proposal.
      *
@@ -123,7 +119,6 @@ export declare class Gov {
      * @returns
      * @since v0.17
      */
-    deposit(proposalID: number, amount: types.Coin[], baseTx: types.BaseTx): Promise<types.TxResult>;
     /**
      * Vote for an active proposal, options: Yes/No/NoWithVeto/Abstain.
      * Only validators and delegators can vote for proposals in the voting period.

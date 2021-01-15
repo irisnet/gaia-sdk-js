@@ -91,21 +91,16 @@ var Tx = /*#__PURE__*/function () {
             switch (_context.prev = _context.next) {
               case 0:
                 // Build Unsigned Tx
-                unsignedTx = this.buildTx(msgs, baseTx); // Not supported in ibc-alpha
-                // const fee = await this.client.utils.toMinCoins(unsignedTx.value.fee.amount);
-                // unsignedTx.value.fee.amount = fee;
-                // Sign Tx
+                unsignedTx = this.buildTx(msgs, baseTx); // Sign Tx
 
                 _context.next = 3;
                 return this.sign(unsignedTx, baseTx);
 
               case 3:
                 signedTx = _context.sent;
-                console.log('hhhhhhhhh:', signedTx.getDisplayContent()); // Broadcast Tx
-
                 return _context.abrupt("return", this.broadcast(signedTx, baseTx.mode));
 
-              case 6:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -190,7 +185,7 @@ var Tx = /*#__PURE__*/function () {
                   break;
                 }
 
-                throw new _errors.SdkError("Decrypt method of KeyDAO not implemented");
+                throw new _errors.SdkError("Decrypt method of KeyDAO not implemented", _errors.CODES.Panic);
 
               case 6:
                 keyObj = this.client.config.keyDAO.read(baseTx.from);
@@ -200,7 +195,7 @@ var Tx = /*#__PURE__*/function () {
                   break;
                 }
 
-                throw new _errors.SdkError("Key with name '".concat(baseTx.from, "' not found"));
+                throw new _errors.SdkError("Key with name '".concat(baseTx.from, "' not found"), _errors.CODES.KeyNotFound);
 
               case 9:
                 accountNumber = (_baseTx$account_numbe = baseTx.account_number) !== null && _baseTx$account_numbe !== void 0 ? _baseTx$account_numbe : '0';
@@ -283,7 +278,7 @@ var Tx = /*#__PURE__*/function () {
       var keyObj = this.client.config.keyDAO.read(name);
 
       if (!keyObj) {
-        throw new _errors.SdkError("Key with name '".concat(name, "' not found"));
+        throw new _errors.SdkError("Key with name '".concat(name, "' not found"), _errors.CODES.KeyNotFound);
       }
 
       var privKey = this.client.config.keyDAO.decrypt(keyObj.privateKey, password);
@@ -366,7 +361,7 @@ var Tx = /*#__PURE__*/function () {
     value: function broadcastTx(txBytes, method) {
       // Only accepts 'broadcast_tx_sync' and 'broadcast_tx_async'
       if (is.not.inArray(method, [types.RpcMethods.BroadcastTxSync, types.RpcMethods.BroadcastTxAsync])) {
-        throw new _errors.SdkError("Unsupported broadcast method: ".concat(method));
+        throw new _errors.SdkError("Unsupported broadcast method: ".concat(method), _errors.CODES.Internal);
       }
 
       return this.client.rpcClient.request(method, {
@@ -469,82 +464,10 @@ var Tx = /*#__PURE__*/function () {
             msg = new types.MsgFundCommunityPool(txMsg.value);
             break;
           }
-        //token
-
-        case types.TxType.MsgIssueToken:
-          {
-            msg = new types.MsgIssueToken(txMsg.value);
-            break;
-          }
-
-        case types.TxType.MsgEditToken:
-          {
-            msg = new types.MsgEditToken(txMsg.value);
-            break;
-          }
-
-        case types.TxType.MsgMintToken:
-          {
-            msg = new types.MsgMintToken(txMsg.value);
-            break;
-          }
-
-        case types.TxType.MsgTransferTokenOwner:
-          {
-            msg = new types.MsgTransferTokenOwner(txMsg.value);
-            break;
-          }
-        //coinswap
-
-        case types.TxType.MsgAddLiquidity:
-          {
-            break;
-          }
-
-        case types.TxType.MsgRemoveLiquidity:
-          {
-            break;
-          }
-
-        case types.TxType.MsgSwapOrder:
-          {
-            break;
-          }
-        //nft
-
-        case types.TxType.MsgIssueDenom:
-          {
-            msg = new types.MsgIssueDenom(txMsg.value);
-            break;
-          }
-
-        case types.TxType.MsgMintNFT:
-          {
-            msg = new types.MsgMintNFT(txMsg.value);
-            break;
-          }
-
-        case types.TxType.MsgEditNFT:
-          {
-            msg = new types.MsgEditNFT(txMsg.value);
-            break;
-          }
-
-        case types.TxType.MsgTransferNFT:
-          {
-            msg = new types.MsgTransferNFT(txMsg.value);
-            break;
-          }
-
-        case types.TxType.MsgBurnNFT:
-          {
-            msg = new types.MsgBurnNFT(txMsg.value);
-            break;
-          }
 
         default:
           {
-            throw new Error("not exist tx type");
+            throw new _errors.SdkError("not exist tx type", _errors.CODES.InvalidType);
           }
       }
 

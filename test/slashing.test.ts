@@ -21,7 +21,7 @@ describe('Slashing Tests', () => {
   describe('Query Signing Info', () => {
     test('query signing info', async () => {
       await BaseTest.getClient()
-        .slashing.querySigningInfo('fca1f46x0s36d5ajjqjurt3znhqfdulyf7zlazpj8n')
+        .slashing.querySigningInfo('cosmosvaloper176dd0tgn38grpc8hpxfmwl6sl8jfmknec30jgp')
         .then(res => {
           console.log(JSON.stringify(res));
         })

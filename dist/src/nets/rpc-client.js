@@ -36,7 +36,7 @@ var RpcClient = /*#__PURE__*/function () {
 
   /**
    * Initialize Tendermint JSON RPC Client
-   * @param url Rpc address of irishub node
+   * @param url Rpc address of gaia node
    * @param config The other configurations, refer to { [[AxiosRequestConfig]] }
    * @returns
    * @since v0.17

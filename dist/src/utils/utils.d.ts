@@ -1,6 +1,6 @@
 import * as types from '../types';
 /**
- * IRISHub SDK JS Utils
+ * Gaia SDK JS Utils
  * @hidden
  */
 export declare class Utils {

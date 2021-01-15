@@ -4,9 +4,7 @@ import { SdkError } from '../errors';
 /**
  * This module is mainly used to transfer coins between accounts,
  * query account balances, and provide common offline transaction signing and broadcasting methods.
- * In addition, the available units of tokens in the IRIShub system are defined using [coin-type](https://www.irisnet.org/docs/concepts/coin-type.html).
- *
- * [More Details](https://www.irisnet.org/docs/features/bank.html)
+ * In addition, the available units of tokens in the gaia system are defined using [coin-type](https://www.irisnet.org/docs/concepts/coin-type.html).
  *
  * @category Modules
  * @since v0.17

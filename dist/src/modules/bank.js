@@ -28,9 +28,7 @@ var _errors = require("../errors");
 /**
  * This module is mainly used to transfer coins between accounts,
  * query account balances, and provide common offline transaction signing and broadcasting methods.
- * In addition, the available units of tokens in the IRIShub system are defined using [coin-type](https://www.irisnet.org/docs/concepts/coin-type.html).
- *
- * [More Details](https://www.irisnet.org/docs/features/bank.html)
+ * In addition, the available units of tokens in the gaia system are defined using [coin-type](https://www.irisnet.org/docs/concepts/coin-type.html).
  *
  * @category Modules
  * @since v0.17
@@ -184,11 +182,11 @@ var Bank = /*#__PURE__*/function () {
     key: "queryBalance",
     value: function queryBalance(address, denom) {
       if (!address) {
-        throw new Error("address can ont be empty");
+        throw new _errors.SdkError("address can ont be empty");
       }
 
       if (!denom) {
-        throw new Error("denom can ont be empty");
+        throw new _errors.SdkError("denom can ont be empty");
       }
 
       var request = new types.bank_query_pb.QueryBalanceRequest();
@@ -205,7 +203,7 @@ var Bank = /*#__PURE__*/function () {
     key: "queryAllBalances",
     value: function queryAllBalances(address) {
       if (!address) {
-        throw new Error("address can ont be empty");
+        throw new _errors.SdkError("address can ont be empty");
       }
 
       var request = new types.bank_query_pb.QueryAllBalancesRequest();
@@ -231,7 +229,7 @@ var Bank = /*#__PURE__*/function () {
     key: "querySupplyOf",
     value: function querySupplyOf(denom) {
       if (!denom) {
-        throw new Error("denom can ont be empty");
+        throw new _errors.SdkError("denom can ont be empty");
       }
 
       var request = new types.bank_query_pb.QuerySupplyOfRequest();

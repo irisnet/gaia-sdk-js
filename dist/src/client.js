@@ -15,8 +15,6 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
-var consts = _interopRequireWildcard(require("./types/constants"));
-
 var modules = _interopRequireWildcard(require("./modules"));
 
 var _rpcClient = require("./nets/rpc-client");
@@ -31,17 +29,15 @@ var AES = _interopRequireWildcard(require("crypto-js/aes"));
 
 var ENC = _interopRequireWildcard(require("crypto-js/enc-utf8"));
 
-/** IRISHub Client */
+/** Gaia Client */
 var Client = /*#__PURE__*/function () {
-  /** IRISHub Client Config */
+  /** Gaia Client Config */
 
   /** Axios client for tendermint rpc requests */
 
   /** WebSocket event listener */
 
   /** Auth module */
-
-  /** Token module */
 
   /** Bank module */
 
@@ -59,28 +55,17 @@ var Client = /*#__PURE__*/function () {
 
   /** Distribution module */
 
-  /** Service module */
-
-  /** Oracle module */
-
-  /** Random module */
-
   /** Utils module */
 
   /** Tendermint module */
 
-  /** Coinswap module */
-
-  /** NFT module */
-
-  /** IRISHub SDK Constructor */
+  /** Gaia SDK Constructor */
   function Client(config) {
     (0, _classCallCheck2["default"])(this, Client);
     (0, _defineProperty2["default"])(this, "config", void 0);
     (0, _defineProperty2["default"])(this, "rpcClient", void 0);
     (0, _defineProperty2["default"])(this, "eventListener", void 0);
     (0, _defineProperty2["default"])(this, "auth", void 0);
-    (0, _defineProperty2["default"])(this, "token", void 0);
     (0, _defineProperty2["default"])(this, "bank", void 0);
     (0, _defineProperty2["default"])(this, "keys", void 0);
     (0, _defineProperty2["default"])(this, "protobuf", void 0);
@@ -89,45 +74,23 @@ var Client = /*#__PURE__*/function () {
     (0, _defineProperty2["default"])(this, "gov", void 0);
     (0, _defineProperty2["default"])(this, "slashing", void 0);
     (0, _defineProperty2["default"])(this, "distribution", void 0);
-    (0, _defineProperty2["default"])(this, "service", void 0);
-    (0, _defineProperty2["default"])(this, "oracle", void 0);
-    (0, _defineProperty2["default"])(this, "random", void 0);
     (0, _defineProperty2["default"])(this, "utils", void 0);
     (0, _defineProperty2["default"])(this, "tendermint", void 0);
-    (0, _defineProperty2["default"])(this, "coinswap", void 0);
-    (0, _defineProperty2["default"])(this, "nft", void 0);
     this.config = config;
     if (!this.config.rpcConfig) this.config.rpcConfig = {};
-    this.config.bech32Prefix = config.network === consts.Network.Mainnet ? {
-      AccAddr: 'iaa',
-      AccPub: 'iap',
-      ValAddr: 'iva',
-      ValPub: 'ivp',
-      ConsAddr: 'ica',
-      ConsPub: 'icp'
-    } : {
-      AccAddr: 'faa',
-      AccPub: 'fap',
-      ValAddr: 'fva',
-      ValPub: 'fvp',
-      ConsAddr: 'fca',
-      ConsPub: 'fcp'
-    }; // Support ibc-alpha
-    // {
-    //   AccAddr: 'cosmos',
-    //   AccPub: 'cosmospub',
-    //   ValAddr: 'cosmosvaloper',
-    //   ValPub: 'cosmosvaloperpub',
-    //   ConsAddr: 'cosmosvalcons',
-    //   ConsPub: 'cosmosvalconspub',
-    // };
-
+    this.config.bech32Prefix = {
+      AccAddr: 'cosmos',
+      AccPub: 'cosmospub',
+      ValAddr: 'cosmosvaloper',
+      ValPub: 'cosmosvaloperpub',
+      ConsAddr: 'cosmosvalcons',
+      ConsPub: 'cosmosvalconspub'
+    };
     this.config.rpcConfig.baseURL = this.config.node;
     this.rpcClient = new _rpcClient.RpcClient(this.config.rpcConfig);
     this.eventListener = new _eventListener.EventListener(this); //TODO (lvsc) there is an error 'Event... is not a constructor'
     // Modules
 
-    this.token = new modules.Token(this);
     this.utils = new modules.Utils(this);
     this.bank = new modules.Bank(this);
     this.keys = new modules.Keys(this);
@@ -137,13 +100,8 @@ var Client = /*#__PURE__*/function () {
     this.gov = new modules.Gov(this);
     this.slashing = new modules.Slashing(this);
     this.distribution = new modules.Distribution(this);
-    this.service = new modules.Service(this);
-    this.oracle = new modules.Oracle(this);
-    this.random = new modules.Random(this);
     this.auth = new modules.Auth(this);
-    this.tendermint = new modules.Tendermint(this);
-    this.coinswap = new modules.Coinswap(this);
-    this.nft = new modules.Nft(this); // Set default encrypt/decrypt methods
+    this.tendermint = new modules.Tendermint(this); // Set default encrypt/decrypt methods
 
     if (!this.config.keyDAO.encrypt || !this.config.keyDAO.decrypt) {
       var defaultKeyDAO = new DefaultKeyDAOImpl();
@@ -173,9 +131,9 @@ var Client = /*#__PURE__*/function () {
       return this;
     }
     /**
-     * Set IRISHub network type
+     * Set Gaia network type
      *
-     * @param network IRISHub network type, mainnet / testnet
+     * @param network Gaia network type, mainnet / testnet
      * @returns The SDK itself
      */
 
@@ -186,9 +144,9 @@ var Client = /*#__PURE__*/function () {
       return this;
     }
     /**
-     * Set IRISHub chain-id
+     * Set Gaia chain-id
      *
-     * @param chainId IRISHub chain-id
+     * @param chainId Gaia chain-id
      * @returns The SDK itself
      */
 
@@ -244,12 +202,12 @@ var Client = /*#__PURE__*/function () {
   }]);
   return Client;
 }();
-/** IRISHub SDK Config */
+/** Gaia SDK Config */
 
 
 exports.Client = Client;
 
-/** Default IRISHub Client Config */
+/** Default Gaia Client Config */
 var DefaultClientConfig = function DefaultClientConfig() {
   (0, _classCallCheck2["default"])(this, DefaultClientConfig);
   (0, _defineProperty2["default"])(this, "node", void 0);
@@ -262,11 +220,11 @@ var DefaultClientConfig = function DefaultClientConfig() {
   (0, _defineProperty2["default"])(this, "rpcConfig", void 0);
   this.node = '';
   this.network = types.Network.Mainnet;
-  this.chainId = 'irishub';
+  this.chainId = '';
   this.gas = '100000';
   this.fee = {
-    amount: '0.6',
-    denom: 'iris'
+    amount: '',
+    denom: ''
   };
   this.keyDAO = new DefaultKeyDAOImpl();
   this.bech32Prefix = {};
@@ -289,17 +247,17 @@ var DefaultKeyDAOImpl = /*#__PURE__*/function () {
   (0, _createClass2["default"])(DefaultKeyDAOImpl, [{
     key: "write",
     value: function write(name, key) {
-      throw new _errors.SdkError('Method not implemented. Please implement KeyDAO first.');
+      throw new _errors.SdkError('Method not implemented. Please implement KeyDAO first.', _errors.CODES.Panic);
     }
   }, {
     key: "read",
     value: function read(name) {
-      throw new _errors.SdkError('Method not implemented. Please implement KeyDAO first.');
+      throw new _errors.SdkError('Method not implemented. Please implement KeyDAO first.', _errors.CODES.Panic);
     }
   }, {
     key: "delete",
     value: function _delete(name) {
-      throw new _errors.SdkError('Method not implemented. Please implement KeyDAO first.');
+      throw new _errors.SdkError('Method not implemented. Please implement KeyDAO first.', _errors.CODES.Panic);
     }
   }, {
     key: "encrypt",
@@ -307,7 +265,7 @@ var DefaultKeyDAOImpl = /*#__PURE__*/function () {
       var encrypted = AES.encrypt(privKey, password).toString();
 
       if (!encrypted) {
-        throw new _errors.SdkError('Private key encrypt failed');
+        throw new _errors.SdkError('Private key encrypt failed', _errors.CODES.Internal);
       }
 
       return encrypted;
@@ -318,7 +276,7 @@ var DefaultKeyDAOImpl = /*#__PURE__*/function () {
       var decrypted = AES.decrypt(encrptedPrivKey, password).toString(ENC);
 
       if (!decrypted) {
-        throw new _errors.SdkError('Wrong password');
+        throw new _errors.SdkError('Wrong password', _errors.CODES.InvalidPassword);
       }
 
       return decrypted;

@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import EventEmitter from 'events';
 /**
- * IRISHub Websocket Client
+ * Gaia Websocket Client
  * @since v0.17
  */
 export declare class WsClient {

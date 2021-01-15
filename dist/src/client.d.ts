@@ -5,9 +5,9 @@ import { EventListener } from './nets/event-listener';
 import { AxiosRequestConfig } from 'axios';
 import * as types from './types';
 import { Wallet } from "./types";
-/** IRISHub Client */
+/** Gaia Client */
 export declare class Client {
-    /** IRISHub Client Config */
+    /** Gaia Client Config */
     config: DefaultClientConfig;
     /** Axios client for tendermint rpc requests */
     rpcClient: RpcClient;
@@ -15,8 +15,6 @@ export declare class Client {
     eventListener: EventListener;
     /** Auth module */
     auth: modules.Auth;
-    /** Token module */
-    token: modules.Token;
     /** Bank module */
     bank: modules.Bank;
     /** Key management module */
@@ -33,21 +31,11 @@ export declare class Client {
     slashing: modules.Slashing;
     /** Distribution module */
     distribution: modules.Distribution;
-    /** Service module */
-    service: modules.Service;
-    /** Oracle module */
-    oracle: modules.Oracle;
-    /** Random module */
-    random: modules.Random;
     /** Utils module */
     utils: modules.Utils;
     /** Tendermint module */
     tendermint: modules.Tendermint;
-    /** Coinswap module */
-    coinswap: modules.Coinswap;
-    /** NFT module */
-    nft: modules.Nft;
-    /** IRISHub SDK Constructor */
+    /** Gaia SDK Constructor */
     constructor(config: DefaultClientConfig);
     /**
      * Set Key DAO Implemention
@@ -57,16 +45,16 @@ export declare class Client {
      */
     withKeyDAO(keyDAO: KeyDAO): this;
     /**
-     * Set IRISHub network type
+     * Set Gaia network type
      *
-     * @param network IRISHub network type, mainnet / testnet
+     * @param network Gaia network type, mainnet / testnet
      * @returns The SDK itself
      */
     withNetwork(network: consts.Network): this;
     /**
-     * Set IRISHub chain-id
+     * Set Gaia chain-id
      *
-     * @param chainId IRISHub chain-id
+     * @param chainId Gaia chain-id
      * @returns The SDK itself
      */
     withChainId(chainId: string): this;
@@ -94,13 +82,13 @@ export declare class Client {
      */
     withRpcConfig(rpcConfig: AxiosRequestConfig): this;
 }
-/** IRISHub SDK Config */
+/** Gaia SDK Config */
 export interface ClientConfig {
-    /** IRISHub node rpc address */
+    /** Gaia node rpc address */
     node: string;
-    /** IRISHub network type, mainnet / testnet */
+    /** Gaia network type, mainnet / testnet */
     network?: consts.Network;
-    /** IRISHub chain-id */
+    /** Gaia chain-id */
     chainId?: string;
     /** Default gas limit */
     gas?: string;
@@ -113,7 +101,7 @@ export interface ClientConfig {
     /** Axios request config for tendermint rpc requests */
     rpcConfig?: AxiosRequestConfig;
 }
-/** Default IRISHub Client Config */
+/** Default Gaia Client Config */
 export declare class DefaultClientConfig implements ClientConfig {
     node: string;
     network: consts.Network;

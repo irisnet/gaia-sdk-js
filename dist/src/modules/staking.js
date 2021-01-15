@@ -604,9 +604,9 @@ var Staking = /*#__PURE__*/function () {
       return subscription;
     }
     /**
-     * TODO: Historical issue, irishub only accepts 10 decimal places due to `sdk.Dec`
+     * TODO: Historical issue, gaia only accepts 10 decimal places due to `sdk.Dec`
      *
-     * Removing on irishub v1.0
+     * Removing on gaia v1.0
      * @deprecated
      * @hidden
      */
@@ -636,7 +636,7 @@ var Staking = /*#__PURE__*/function () {
   }, {
     key: "createValidator",
     value: function createValidator() {
-      throw new _errors.SdkError('Not supported');
+      throw new _errors.SdkError('Not supported', _errors.CODES.Internal);
     }
   }]);
   return Staking;

@@ -121,58 +121,6 @@ Object.keys(_distribution).forEach(function (key) {
   });
 });
 
-var _service = require("./service");
-
-Object.keys(_service).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (key in exports && exports[key] === _service[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _service[key];
-    }
-  });
-});
-
-var _oracle = require("./oracle");
-
-Object.keys(_oracle).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (key in exports && exports[key] === _oracle[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _oracle[key];
-    }
-  });
-});
-
-var _random = require("./random");
-
-Object.keys(_random).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (key in exports && exports[key] === _random[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _random[key];
-    }
-  });
-});
-
-var _token = require("./token");
-
-Object.keys(_token).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (key in exports && exports[key] === _token[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _token[key];
-    }
-  });
-});
-
 var _utils = require("./utils");
 
 Object.keys(_utils).forEach(function (key) {
@@ -199,19 +147,6 @@ Object.keys(_tendermint).forEach(function (key) {
   });
 });
 
-var _coinswap = require("./coinswap");
-
-Object.keys(_coinswap).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (key in exports && exports[key] === _coinswap[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _coinswap[key];
-    }
-  });
-});
-
 var _protobuf = require("./protobuf");
 
 Object.keys(_protobuf).forEach(function (key) {
@@ -221,19 +156,6 @@ Object.keys(_protobuf).forEach(function (key) {
     enumerable: true,
     get: function get() {
       return _protobuf[key];
-    }
-  });
-});
-
-var _nft = require("./nft");
-
-Object.keys(_nft).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (key in exports && exports[key] === _nft[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _nft[key];
     }
   });
 });

@@ -145,82 +145,10 @@ var Protobuf = /*#__PURE__*/function () {
             messageModelClass = types.MsgFundCommunityPool.getModelClass();
             break;
           }
-        //token
-
-        case types.TxType.MsgIssueToken:
-          {
-            messageModelClass = types.MsgIssueToken.getModelClass();
-            break;
-          }
-
-        case types.TxType.MsgEditToken:
-          {
-            messageModelClass = types.MsgEditToken.getModelClass();
-            break;
-          }
-
-        case types.TxType.MsgMintToken:
-          {
-            messageModelClass = types.MsgMintToken.getModelClass();
-            break;
-          }
-
-        case types.TxType.MsgTransferTokenOwner:
-          {
-            messageModelClass = types.MsgTransferTokenOwner.getModelClass();
-            break;
-          }
-        //coinswap
-
-        case types.TxType.MsgAddLiquidity:
-          {
-            break;
-          }
-
-        case types.TxType.MsgRemoveLiquidity:
-          {
-            break;
-          }
-
-        case types.TxType.MsgSwapOrder:
-          {
-            break;
-          }
-        //nft
-
-        case types.TxType.MsgIssueDenom:
-          {
-            messageModelClass = types.MsgIssueDenom.getModelClass();
-            break;
-          }
-
-        case types.TxType.MsgMintNFT:
-          {
-            messageModelClass = types.MsgMintNFT.getModelClass();
-            break;
-          }
-
-        case types.TxType.MsgEditNFT:
-          {
-            messageModelClass = types.MsgEditNFT.getModelClass();
-            break;
-          }
-
-        case types.TxType.MsgTransferNFT:
-          {
-            messageModelClass = types.MsgTransferNFT.getModelClass();
-            break;
-          }
-
-        case types.TxType.MsgBurnNFT:
-          {
-            messageModelClass = types.MsgBurnNFT.getModelClass();
-            break;
-          }
 
         default:
           {
-            throw new Error("not exist tx type");
+            throw new _errors.SdkError("not exist tx type", _errors.CODES.InvalidType);
           }
       }
 
