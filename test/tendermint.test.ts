@@ -69,7 +69,7 @@ describe('Tendermint Tests', () => {
     async () => {
       await BaseTest.getClient()
         .tendermint.queryTx(
-          '46A832D1509A1BF5B0F3559E1CF931A6006144D2A487E0A36D3120E6205B1FF7'
+          '24421EF097E0309949628215730D9BFAC54645355A564E738717A952FD155B5B'
         )
         .then(res => {
           console.log(JSON.stringify(res));

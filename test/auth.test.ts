@@ -9,7 +9,7 @@ describe('Nft Tests', () => {
       'query Account',
       async () => {
         await BaseTest.getClient()
-        .auth.queryAccount('iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp')
+        .auth.queryAccount('cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj')
         .then(res => {
           console.log(JSON.stringify(res));
         })

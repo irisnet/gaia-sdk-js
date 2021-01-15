@@ -5,8 +5,8 @@ describe('Staking Tests', () => {
     test('query delegation', async () => {
       await BaseTest.getClient()
         .staking.queryDelegation(
-          'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp',
-          'iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4'
+          'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
+          'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t'
         )
         .then(res => {
           console.log(res);
@@ -19,8 +19,8 @@ describe('Staking Tests', () => {
     test('query unbonding delegation', async () => {
       await BaseTest.getClient()
         .staking.queryUnbondingDelegation(
-          'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp',
-          'iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4'
+          'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
+          'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t'
         )
         .then(res => {
           console.log(res);
@@ -33,7 +33,7 @@ describe('Staking Tests', () => {
     test('query delegations of a delegator', async () => {
       await BaseTest.getClient()
         .staking.queryDelegations({
-          delegator_addr:'iaa1eqvkfthtrr93g4p9qspp54w6dtjtrn27ar7rpw'
+          delegator_addr:'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj'
         })
         .then(res => {
           console.log(res);
@@ -47,7 +47,7 @@ describe('Staking Tests', () => {
       await BaseTest.getClient()
         .staking.queryDelegatorUnbondingDelegations(
           {
-            delegator_addr:'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp',
+            delegator_addr:'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
           }
         )
         .then(res => {
@@ -62,9 +62,9 @@ describe('Staking Tests', () => {
       await BaseTest.getClient()
         .staking.queryRedelegation(
           {
-            delegator_addr:'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp',
-            /*src_validator_addr:'iva1svannhv2zaxefq83m7treg078udfk37lpjufkw',
-            dst_validator_addr:'iva1g5uv7khupczd6w03a7t066mwjdx9zkma82rnk0',*/
+            delegator_addr:'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
+            src_validator_addr:'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t',
+            dst_validator_addr:'cosmosvaloper176dd0tgn38grpc8hpxfmwl6sl8jfmknec30jgp',
           }
         )
         .then(res => {
@@ -79,7 +79,7 @@ describe('Staking Tests', () => {
       await BaseTest.getClient()
         .staking.queryDelegatorValidators(
           {
-            delegator_addr:'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp',
+            delegator_addr:'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
           }
         )
         .then(res => {
@@ -94,8 +94,8 @@ describe('Staking Tests', () => {
       await BaseTest.getClient()
         .staking.queryDelegatorValidator(
           {
-            delegator_addr:'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp',
-            validator_addr:'iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4',
+            delegator_addr:'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
+            validator_addr:'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t',
           }
         )
         .then(res => {
@@ -147,7 +147,7 @@ describe('Staking Tests', () => {
       await BaseTest.getClient()
         .staking.queryValidatorDelegations(
           {
-            validator_addr:'iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4'
+            validator_addr:'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t'
           }
         )
         .then(res => {
@@ -162,7 +162,7 @@ describe('Staking Tests', () => {
       await BaseTest.getClient()
         .staking.queryValidatorUnbondingDelegations(
           {
-            validator_addr:'iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4'
+            validator_addr:'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t'
           }
         )
         .then(res => {
@@ -175,7 +175,7 @@ describe('Staking Tests', () => {
 
     test('query a validator', async () => {
       await BaseTest.getClient()
-        .staking.queryValidator('iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4')
+        .staking.queryValidator('cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t')
         .then(res => {
           console.log(res);
         })
@@ -205,8 +205,8 @@ describe('Staking Tests', () => {
     test('delegate', async () => {
       await BaseTest.getClient()
         .staking.delegate(
-          'iva1geqzj2jjeqgurpu8u9x4asq5m6rw5lm7nn22c2',
-          { denom: 'ubif', amount: '5' },
+          'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t',
+          { denom: 'ubig', amount: '50000' },
           BaseTest.baseTx
         )
         .then(res => {
@@ -221,8 +221,8 @@ describe('Staking Tests', () => {
     test('unbond', async () => {
       await BaseTest.getClient()
         .staking.undelegate(
-          'iva1g5uv7khupczd6w03a7t066mwjdx9zkma82rnk0',
-              { denom: 'ubif', amount: '1' },
+          'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t',
+              { denom: 'ubig', amount: '1000' },
           BaseTest.baseTx
         )
         .then(res => {
@@ -237,9 +237,9 @@ describe('Staking Tests', () => {
     test('redelegate', async () => {
       await BaseTest.getClient()
         .staking.redelegate(
-          'iva1geqzj2jjeqgurpu8u9x4asq5m6rw5lm7nn22c2',
-          'iva1736ypcrmwvurylfprfgmjwr625c6ycdv8uyjlp',
-              { denom: 'ubif', amount: '1' },
+          'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t',
+          'cosmosvaloper176dd0tgn38grpc8hpxfmwl6sl8jfmknec30jgp',
+              { denom: 'ubig', amount: '100' },
           BaseTest.baseTx
         )
         .then(res => {

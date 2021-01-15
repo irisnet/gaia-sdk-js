@@ -1,6 +1,6 @@
 const CODESPACE_ROOT = 'sdk';
 
-/** Error codes in irishub v1.0 */
+/** Error codes in gaia v1.0 */
 export const CODES = {
   OK: 0,
   Internal: 1,
@@ -48,7 +48,7 @@ export const CODES = {
   
 };
 
-/** IRISHub SDK Error */
+/** Gaia SDK Error */
 export class SdkError extends Error {
   // /** Error code space, reserved field */
   // codespace = CODESPACE_ROOT;
@@ -56,8 +56,8 @@ export class SdkError extends Error {
   code = CODES.InvalidRequest;
 
   /**
-   * Initialize SdkError with irishub error msg
-   * @param msg irishub error msg
+   * Initialize SdkError with gaia error msg
+   * @param msg gaia error msg
    */
   constructor(msg: string, code = CODES.InvalidRequest) {
     super(msg);

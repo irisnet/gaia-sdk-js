@@ -10,14 +10,14 @@ describe('Bank Tests', () => {
       async () => {
         const amount: types.Coin[] = [
           {
-            denom: 'ubif',
+            denom: 'ubig',
             amount: '1',
           },
         ];
 
         await BaseTest.getClient()
           .bank.send(
-            'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp',
+            'cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc',
             amount,
             BaseTest.baseTx
           )
@@ -45,7 +45,7 @@ describe('Bank Tests', () => {
 
         await BaseTest.getClient()
           .bank.multiSend(
-            'iaa1gytgufwqkz9tmhjgljfxd3qcwpdzymj6022q3w',
+            'cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc',
             amount,
             BaseTest.baseTx
           )
@@ -65,7 +65,7 @@ describe('Bank Tests', () => {
       'query account',
       async () => {
         await BaseTest.getClient()
-          .bank.queryAccount('iaa1eqvkfthtrr93g4p9qspp54w6dtjtrn27ar7rpw')
+          .bank.queryAccount('cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc')
           .then(res => {
             console.log(res);
           })
@@ -80,7 +80,7 @@ describe('Bank Tests', () => {
       'query Balance',
       async () => {
         await BaseTest.getClient()
-          .bank.queryBalance('iaa1eqvkfthtrr93g4p9qspp54w6dtjtrn27ar7rpw','ubif')
+          .bank.queryBalance('cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc','ubig')
           .then(res => {
             console.log(JSON.stringify(res));
           })
@@ -95,7 +95,7 @@ describe('Bank Tests', () => {
       'query All Balances',
       async () => {
         await BaseTest.getClient()
-          .bank.queryAllBalances('iaa1eqvkfthtrr93g4p9qspp54w6dtjtrn27ar7rpw')
+          .bank.queryAllBalances('cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc')
           .then(res => {
             console.log(JSON.stringify(res));
           })

@@ -6,7 +6,7 @@ let timeout = 9999;
 describe('Tx Tests', () => {
   const amount: types.Coin[] = [
     {
-      denom: 'stake',
+      denom: 'ubig',
       amount: '1',
     },
   ];
@@ -15,8 +15,8 @@ describe('Tx Tests', () => {
     {
       type:types.TxType.MsgSend,
       value:{
-        from_address:'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp',
-        to_address:'iaa1eqvkfthtrr93g4p9qspp54w6dtjtrn27ar7rpw',
+        from_address:'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
+        to_address:'cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc',
         amount
       }
     }
@@ -26,16 +26,16 @@ describe('Tx Tests', () => {
     {
       type:types.TxType.MsgSend,
       value:{
-        from_address:'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp',
-        to_address:'iaa1eqvkfthtrr93g4p9qspp54w6dtjtrn27ar7rpw',
+        from_address:'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
+        to_address:'cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc',
         amount
       }
     },
     {
       type:types.TxType.MsgSend,
       value:{
-        from_address:'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp',
-        to_address:'iaa1eqvkfthtrr93g4p9qspp54w6dtjtrn27ar7rpw',
+        from_address:'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
+        to_address:'cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc',
         amount
       }
     }
@@ -44,8 +44,8 @@ describe('Tx Tests', () => {
   describe('watch/cold wallet', () => {
     test('watch/cold wallet tx', async () => {
       let baseTx = {...BaseTest.baseTx};
-      baseTx.account_number = '8';
-      baseTx.sequence = '356';
+      baseTx.account_number = '2';
+      baseTx.sequence = '27';
       // watch wallet
       let unsignedStdTx =  BaseTest.getClient().tx.buildTx(msgs, baseTx);
       let unsignedTxModel = unsignedStdTx.getProtoModel();

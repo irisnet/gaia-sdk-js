@@ -9,9 +9,9 @@ import * as AES from 'crypto-js/aes';
 import * as ENC from 'crypto-js/enc-utf8';
 import {Wallet} from "./types";
 
-/** IRISHub Client */
+/** Gaia Client */
 export class Client {
-  /** IRISHub Client Config */
+  /** Gaia Client Config */
   config: DefaultClientConfig;
 
   /** Axios client for tendermint rpc requests */
@@ -22,9 +22,6 @@ export class Client {
 
   /** Auth module */
   auth: modules.Auth;
-
-  /** Token module */
-  token: modules.Token;
 
   /** Bank module */
   bank: modules.Bank;
@@ -50,66 +47,31 @@ export class Client {
   /** Distribution module */
   distribution: modules.Distribution;
 
-  /** Service module */
-  service: modules.Service;
-
-  /** Oracle module */
-  oracle: modules.Oracle;
-
-  /** Random module */
-  random: modules.Random;
-
   /** Utils module */
   utils: modules.Utils;
 
   /** Tendermint module */
   tendermint: modules.Tendermint;
 
-  /** Coinswap module */
-  coinswap: modules.Coinswap;
-
-  /** NFT module */
-  nft: modules.Nft;
-
-  /** IRISHub SDK Constructor */
+  /** Gaia SDK Constructor */
   constructor(config: DefaultClientConfig) {
     this.config = config;
     if (!this.config.rpcConfig) this.config.rpcConfig = {};
 
-    this.config.bech32Prefix =
-      config.network === consts.Network.Mainnet
-        ? {
-            AccAddr: 'iaa',
-            AccPub: 'iap',
-            ValAddr: 'iva',
-            ValPub: 'ivp',
-            ConsAddr: 'ica',
-            ConsPub: 'icp',
-          }
-        : {
-            AccAddr: 'faa',
-            AccPub: 'fap',
-            ValAddr: 'fva',
-            ValPub: 'fvp',
-            ConsAddr: 'fca',
-            ConsPub: 'fcp',
-          };
-
-      // Support ibc-alpha
-      // {
-      //   AccAddr: 'cosmos',
-      //   AccPub: 'cosmospub',
-      //   ValAddr: 'cosmosvaloper',
-      //   ValPub: 'cosmosvaloperpub',
-      //   ConsAddr: 'cosmosvalcons',
-      //   ConsPub: 'cosmosvalconspub',
-      // };
+    this.config.bech32Prefix = {
+      AccAddr: 'cosmos',
+      AccPub: 'cosmospub',
+      ValAddr: 'cosmosvaloper',
+      ValPub: 'cosmosvaloperpub',
+      ConsAddr: 'cosmosvalcons',
+      ConsPub: 'cosmosvalconspub',
+    };
+      
     this.config.rpcConfig.baseURL = this.config.node;
     this.rpcClient = new RpcClient(this.config.rpcConfig);
     this.eventListener = new EventListener(this); //TODO (lvsc) there is an error 'Event... is not a constructor'
 
     // Modules
-    this.token = new modules.Token(this);
     this.utils = new modules.Utils(this);
     this.bank = new modules.Bank(this);
     this.keys = new modules.Keys(this);
@@ -119,14 +81,8 @@ export class Client {
     this.gov = new modules.Gov(this);
     this.slashing = new modules.Slashing(this);
     this.distribution = new modules.Distribution(this);
-    this.service = new modules.Service(this);
-    this.oracle = new modules.Oracle(this);
-    this.random = new modules.Random(this);
     this.auth = new modules.Auth(this);
-    this.tendermint = new modules.Tendermint(this);
-    this.coinswap = new modules.Coinswap(this);
-    this.nft = new modules.Nft(this);
-    
+    this.tendermint = new modules.Tendermint(this);    
 
     // Set default encrypt/decrypt methods
     if (!this.config.keyDAO.encrypt || !this.config.keyDAO.decrypt) {
@@ -154,9 +110,9 @@ export class Client {
   }
 
   /**
-   * Set IRISHub network type
+   * Set Gaia network type
    *
-   * @param network IRISHub network type, mainnet / testnet
+   * @param network Gaia network type, mainnet / testnet
    * @returns The SDK itself
    */
   withNetwork(network: consts.Network) {
@@ -165,9 +121,9 @@ export class Client {
   }
 
   /**
-   * Set IRISHub chain-id
+   * Set Gaia chain-id
    *
-   * @param chainId IRISHub chain-id
+   * @param chainId Gaia chain-id
    * @returns The SDK itself
    */
   withChainId(chainId: string) {
@@ -213,15 +169,15 @@ export class Client {
   }
 }
 
-/** IRISHub SDK Config */
+/** Gaia SDK Config */
 export interface ClientConfig {
-  /** IRISHub node rpc address */
+  /** Gaia node rpc address */
   node: string;
 
-  /** IRISHub network type, mainnet / testnet */
+  /** Gaia network type, mainnet / testnet */
   network?: consts.Network;
 
-  /** IRISHub chain-id */
+  /** Gaia chain-id */
   chainId?: string;
 
   /** Default gas limit */
@@ -240,7 +196,7 @@ export interface ClientConfig {
   rpcConfig?: AxiosRequestConfig;
 }
 
-/** Default IRISHub Client Config */
+/** Default Gaia Client Config */
 export class DefaultClientConfig implements ClientConfig {
   node: string;
   network: consts.Network;
@@ -254,9 +210,9 @@ export class DefaultClientConfig implements ClientConfig {
   constructor() {
     this.node = '';
     this.network = types.Network.Mainnet;
-    this.chainId = 'irishub';
+    this.chainId = '';
     this.gas = '100000';
-    this.fee = { amount: '0.6', denom: 'iris' };
+    this.fee = { amount: '', denom: '' };
     this.keyDAO = new DefaultKeyDAOImpl();
     this.bech32Prefix = {} as Bech32Prefix;
     this.rpcConfig = { timeout: 2000 };

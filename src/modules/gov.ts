@@ -162,27 +162,27 @@ export class Gov {
    * @returns
    * @since v0.17
    */
-  async submitParameterChangeProposal(
-    title: string,
-    description: string,
-    initialDeposit: types.Coin[],
-    params: types.ChangeParameter[],
-    baseTx: types.BaseTx
-  ): Promise<types.TxResult> {
-    const proposer = this.client.keys.show(baseTx.from);
-    const coins = await this.client.utils.toMinCoins(initialDeposit);
-    const msgs: types.Msg[] = [
-      new MsgSubmitParameterChangeProposal({
-        title,
-        description,
-        proposer,
-        initial_deposit: coins,
-        params,
-      }),
-    ];
+  // async submitParameterChangeProposal(
+  //   title: string,
+  //   description: string,
+  //   initialDeposit: types.Coin[],
+  //   params: types.ChangeParameter[],
+  //   baseTx: types.BaseTx
+  // ): Promise<types.TxResult> {
+  //   const proposer = this.client.keys.show(baseTx.from);
+  //   const coins = await this.client.utils.toMinCoins(initialDeposit);
+  //   const msgs: types.Msg[] = [
+  //     new MsgSubmitParameterChangeProposal({
+  //       title,
+  //       description,
+  //       proposer,
+  //       initial_deposit: coins,
+  //       params,
+  //     }),
+  //   ];
 
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
+  //   return this.client.tx.buildAndSend(msgs, baseTx);
+  // }
 
   /**
    * Submit a PlainTextProposal along with an initial deposit
@@ -196,25 +196,25 @@ export class Gov {
    * @returns
    * @since v0.17
    */
-  async submitPlainTextProposal(
-    title: string,
-    description: string,
-    initialDeposit: types.Coin[],
-    baseTx: types.BaseTx
-  ): Promise<types.TxResult> {
-    const proposer = this.client.keys.show(baseTx.from);
-    const coins = await this.client.utils.toMinCoins(initialDeposit);
-    const msgs: types.Msg[] = [
-      new MsgSubmitPlainTextProposal({
-        title,
-        description,
-        proposer,
-        initial_deposit: coins,
-      }),
-    ];
+  // async submitPlainTextProposal(
+  //   title: string,
+  //   description: string,
+  //   initialDeposit: types.Coin[],
+  //   baseTx: types.BaseTx
+  // ): Promise<types.TxResult> {
+  //   const proposer = this.client.keys.show(baseTx.from);
+  //   const coins = await this.client.utils.toMinCoins(initialDeposit);
+  //   const msgs: types.Msg[] = [
+  //     new MsgSubmitPlainTextProposal({
+  //       title,
+  //       description,
+  //       proposer,
+  //       initial_deposit: coins,
+  //     }),
+  //   ];
 
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
+  //   return this.client.tx.buildAndSend(msgs, baseTx);
+  // }
 
   /**
    * Submit a CommunityTaxUsageProposal along with an initial deposit
@@ -233,32 +233,32 @@ export class Gov {
    * @param baseTx
    * @since v0.17
    */
-  async submitCommunityTaxUsageProposal(
-    title: string,
-    description: string,
-    initialDeposit: types.Coin[],
-    usage: CommunityTaxUsageType,
-    destAddress: string,
-    percent: number,
-    baseTx: types.BaseTx
-  ): Promise<types.TxResult> {
-    const proposer = this.client.keys.show(baseTx.from);
+  // async submitCommunityTaxUsageProposal(
+  //   title: string,
+  //   description: string,
+  //   initialDeposit: types.Coin[],
+  //   usage: CommunityTaxUsageType,
+  //   destAddress: string,
+  //   percent: number,
+  //   baseTx: types.BaseTx
+  // ): Promise<types.TxResult> {
+  //   const proposer = this.client.keys.show(baseTx.from);
 
-    const coins = await this.client.utils.toMinCoins(initialDeposit);
-    const msgs: types.Msg[] = [
-      new MsgSubmitCommunityTaxUsageProposal({
-        title,
-        description,
-        proposer,
-        initial_deposit: coins,
-        usage: CommunityTaxUsageType[usage],
-        dest_address: destAddress,
-        percent: String(percent),
-      }),
-    ];
+  //   const coins = await this.client.utils.toMinCoins(initialDeposit);
+  //   const msgs: types.Msg[] = [
+  //     new MsgSubmitCommunityTaxUsageProposal({
+  //       title,
+  //       description,
+  //       proposer,
+  //       initial_deposit: coins,
+  //       usage: CommunityTaxUsageType[usage],
+  //       dest_address: destAddress,
+  //       percent: String(percent),
+  //     }),
+  //   ];
 
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
+  //   return this.client.tx.buildAndSend(msgs, baseTx);
+  // }
 
   /**
    * Deposit tokens for an active proposal.
@@ -271,20 +271,20 @@ export class Gov {
    * @returns
    * @since v0.17
    */
-  async deposit(
-    proposalID: number,
-    amount: types.Coin[],
-    baseTx: types.BaseTx
-  ): Promise<types.TxResult> {
-    const depositor = this.client.keys.show(baseTx.from);
+  // async deposit(
+  //   proposalID: number,
+  //   amount: types.Coin[],
+  //   baseTx: types.BaseTx
+  // ): Promise<types.TxResult> {
+  //   const depositor = this.client.keys.show(baseTx.from);
 
-    const coins = await this.client.utils.toMinCoins(amount);
-    const msgs: types.Msg[] = [
-      new MsgDeposit(String(proposalID), depositor, coins),
-    ];
+  //   const coins = await this.client.utils.toMinCoins(amount);
+  //   const msgs: types.Msg[] = [
+  //     new MsgDeposit(String(proposalID), depositor, coins),
+  //   ];
 
-    return this.client.tx.buildAndSend(msgs, baseTx);
-  }
+  //   return this.client.tx.buildAndSend(msgs, baseTx);
+  // }
 
   /**
    * Vote for an active proposal, options: Yes/No/NoWithVeto/Abstain.

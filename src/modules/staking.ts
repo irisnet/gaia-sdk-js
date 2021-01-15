@@ -623,9 +623,9 @@ export class Staking {
   }
 
   /**
-   * TODO: Historical issue, irishub only accepts 10 decimal places due to `sdk.Dec`
+   * TODO: Historical issue, gaia only accepts 10 decimal places due to `sdk.Dec`
    *
-   * Removing on irishub v1.0
+   * Removing on gaia v1.0
    * @deprecated
    * @hidden
    */

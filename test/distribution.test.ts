@@ -22,7 +22,7 @@ describe('Distribution Tests', () => {
             'query Validator Outstanding Rewards',
             async () => {
                 await BaseTest.getClient().distribution
-                    .queryValidatorOutstandingRewards('iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4')
+                    .queryValidatorOutstandingRewards('cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t')
                     .then(res => {
                         console.log(JSON.stringify(res));
                     })
@@ -36,7 +36,7 @@ describe('Distribution Tests', () => {
             'query Validator Commission',
             async () => {
                 await BaseTest.getClient().distribution
-                    .queryValidatorCommission('iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4')
+                    .queryValidatorCommission('cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t')
                     .then(res => {
                         console.log(JSON.stringify(res));
                     })
@@ -51,7 +51,7 @@ describe('Distribution Tests', () => {
             async () => {
                 await BaseTest.getClient().distribution
                     .queryValidatorSlashes(
-                        'iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4',
+                        'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t',
 
                     )
                     .then(res => {
@@ -68,8 +68,8 @@ describe('Distribution Tests', () => {
             async () => {
                 await BaseTest.getClient().distribution
                     .queryDelegationRewards(
-                        'iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4',
-                        'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp'
+                        'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t',
+                        'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj'
                     )
                     .then(res => {
                         console.log(JSON.stringify(res));
@@ -85,7 +85,7 @@ describe('Distribution Tests', () => {
             async () => {
                 await BaseTest.getClient().distribution
                     .queryDelegationTotalRewards(
-                        'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp'
+                        'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj'
                     )
                     .then(res => {
                         console.log(res);
@@ -101,7 +101,7 @@ describe('Distribution Tests', () => {
             async () => {
                 await BaseTest.getClient().distribution
                     .queryDelegatorValidators(
-                        'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp'
+                        'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj'
                     )
                     .then(res => {
                         console.log(JSON.stringify(res));
@@ -117,7 +117,7 @@ describe('Distribution Tests', () => {
             async () => {
                 await BaseTest.getClient().distribution
                     .queryDelegatorWithdrawAddress(
-                        'iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp'
+                        'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj'
                     )
                     .then(res => {
                         console.log(JSON.stringify(res));
@@ -149,7 +149,7 @@ describe('Distribution Tests', () => {
             'withdraw Validator Commission',
             async () => {
                 await BaseTest.getClient().distribution
-                    .withdrawValidatorCommission('iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4', BaseTest.baseTx)
+                    .withdrawValidatorCommission('cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t', BaseTest.baseTx)
                     .then(res => {
                         console.log(JSON.stringify(res));
                     })
@@ -166,7 +166,7 @@ describe('Distribution Tests', () => {
             async () => {
                 const amount: types.Coin[] = [
                     {
-                        denom: 'stake',
+                        denom: 'ubig',
                         amount: '1',
                     },
                 ];
@@ -187,7 +187,7 @@ describe('Distribution Tests', () => {
             'set withdraw address',
             async () => {
                 await BaseTest.getClient().distribution
-                    .setWithdrawAddr('iaa14x8a7y88py9xkvkxzld3jxhgpjpm03whruzwzp', BaseTest.baseTx)
+                    .setWithdrawAddr('cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj', BaseTest.baseTx)
                     .then(res => {
                         console.log(JSON.stringify(res));
                     })
@@ -206,7 +206,7 @@ describe('Distribution Tests', () => {
 
                 await BaseTest.getClient()
                     .distribution.withdrawRewards(
-                        'iva1lny43v3y496wj6v05m4xpv8nv9c4ra9q57l4y4',
+                        'cosmosvaloper186qhtc62cf6ejlt3erw6zk28mgw8ne7g7lrh6t',
                         BaseTest.baseTx,
                     )
                     .then(res => {

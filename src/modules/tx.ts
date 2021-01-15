@@ -340,57 +340,6 @@ export class Tx {
         msg = new types.MsgFundCommunityPool(txMsg.value);
         break;
       }
-      //token
-      case types.TxType.MsgIssueToken: {
-        msg = new types.MsgIssueToken(txMsg.value);
-        break;
-      }
-      case types.TxType.MsgEditToken: {
-        msg = new types.MsgEditToken(txMsg.value);
-        break;
-      }
-      case types.TxType.MsgMintToken: {
-        msg = new types.MsgMintToken(txMsg.value);
-        break;
-      }
-      case types.TxType.MsgTransferTokenOwner: {
-        msg = new types.MsgTransferTokenOwner(txMsg.value);
-        break;
-      }
-      //coinswap
-      case types.TxType.MsgAddLiquidity: {
-          
-          break;
-      } 
-      case types.TxType.MsgRemoveLiquidity: {
-          
-          break;
-      } 
-      case types.TxType.MsgSwapOrder: {
-          
-          break;
-      }
-      //nft
-      case types.TxType.MsgIssueDenom: {
-          msg = new types.MsgIssueDenom(txMsg.value)
-          break;
-      }
-      case types.TxType.MsgMintNFT: {
-          msg = new types.MsgMintNFT(txMsg.value)
-          break;
-      }
-      case types.TxType.MsgEditNFT: {
-          msg = new types.MsgEditNFT(txMsg.value)
-          break;
-      }
-      case types.TxType.MsgTransferNFT: {
-          msg = new types.MsgTransferNFT(txMsg.value)
-          break;
-      }
-      case types.TxType.MsgBurnNFT: {
-          msg = new types.MsgBurnNFT(txMsg.value)
-          break;
-      }
       default: {
           throw new SdkError("not exist tx type",CODES.InvalidType);
       }

@@ -32,7 +32,7 @@ class EventDAO {
 }
 
 /**
- * IRISHub Event Listener
+ * Gaia Event Listener
  * @since v0.17
  */
 export class EventListener {

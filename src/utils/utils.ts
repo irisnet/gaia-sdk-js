@@ -7,7 +7,7 @@ import { SdkError, CODES } from '../errors';
 import * as types from '../types';
 
 /**
- * IRISHub SDK JS Utils
+ * Gaia SDK JS Utils
  * @hidden
  */
 export class Utils {

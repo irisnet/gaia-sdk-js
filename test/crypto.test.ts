@@ -13,18 +13,18 @@ test('Crypto', async () => {
   const pubKey = Crypto.getPublicKeyFromPrivateKey(privKey);
 
   // Gets an address from a public key hex.
-  const address = Crypto.getAddressFromPublicKey(pubKey, 'iaa');
-  expect(address.substring(0, 3)).toBe('iaa');
+  const address = Crypto.getAddressFromPublicKey(pubKey, 'cosmos');
+  expect(address.substring(0, 6)).toBe('cosmos');
 
   // Generate keystore
-  const keystore = Crypto.generateKeyStore(privKey, 'password', 'iaa');
+  const keystore = Crypto.generateKeyStore(privKey, 'password', 'cosmos');
   expect(JSON.parse(JSON.stringify(keystore)).address).toBe(address);
 
   // Get private key from keystore
   const privKey1 = Crypto.getPrivateKeyFromKeyStore(keystore, 'password');
   expect(privKey1).toBe(privKey);
 
-  console.log(Crypto.encodeAddress('2F36E18CF00DA1568F72AAFD98D94C8D472022C7', 'fca'));
+  console.log(Crypto.encodeAddress('2F36E18CF00DA1568F72AAFD98D94C8D472022C7', 'cosmosvalcons'));
 
   console.log(Buffer.from('bXbzqbOidvLADyfR/cLVm2o6L9vcpPh+PF6O8m2sOQ4=', 'hex'));
   // TODO
@@ -35,6 +35,6 @@ test('Marshal PubKey', async ()=>{
     type:types.PubkeyType.ed25519,
     value:'F205xccFhKHMnNEHFwtHLzDVjPaGGBuSnO0wR8OmEvo='
   });
-  let pk_bech32 = Crypto.encodeAddress(pk,'icp');
+  let pk_bech32 = Crypto.encodeAddress(pk,'cosmosvalconspub');
   console.log('pk_bech32:',pk_bech32);
 });

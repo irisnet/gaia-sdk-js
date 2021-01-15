@@ -6,7 +6,7 @@ test('Keys', () => {
   
   // Create a new key
   const addedKey = client.keys.add('name1', password);
-  expect(addedKey.address.substring(0, 3)).toBe('iaa');
+  expect(addedKey.address.substring(0, 6)).toBe('cosmos');
   expect(addedKey.mnemonic.split(' ').length).toBe(24);
 
   /*// Recover a key
@@ -40,13 +40,13 @@ test('Keys', () => {
 test('recover', () => {
     const client = BaseTest.getClient();
     const nmemonic = 'fatigue panther innocent dress person fluid animal raven material embark target spread kiss smile cycle begin rocket pull couple story mass analyst guilt network'
-    const key = client.keys.recover('', 'test',nmemonic);
+    const key = client.keys.recover('123', 'test',nmemonic);
     console.log(key)
 });
 
 test('add', () => {
     const client = BaseTest.getClient();
-    const key = client.keys.add('', 'test');
+    const key = client.keys.add('123', 'test');
     console.log(key)
 });
 
