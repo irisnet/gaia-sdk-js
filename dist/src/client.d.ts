@@ -1,7 +1,6 @@
 import * as consts from './types/constants';
 import * as modules from './modules';
 import { RpcClient } from './nets/rpc-client';
-import { EventListener } from './nets/event-listener';
 import { AxiosRequestConfig } from 'axios';
 import * as types from './types';
 import { Wallet } from "./types";
@@ -11,8 +10,6 @@ export declare class Client {
     config: DefaultClientConfig;
     /** Axios client for tendermint rpc requests */
     rpcClient: RpcClient;
-    /** WebSocket event listener */
-    eventListener: EventListener;
     /** Auth module */
     auth: modules.Auth;
     /** Bank module */
@@ -25,8 +22,6 @@ export declare class Client {
     staking: modules.Staking;
     /** Tx module */
     tx: modules.Tx;
-    /** Gov module */
-    gov: modules.Gov;
     /** Slashing module */
     slashing: modules.Slashing;
     /** Distribution module */

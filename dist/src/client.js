@@ -19,8 +19,6 @@ var modules = _interopRequireWildcard(require("./modules"));
 
 var _rpcClient = require("./nets/rpc-client");
 
-var _eventListener = require("./nets/event-listener");
-
 var types = _interopRequireWildcard(require("./types"));
 
 var _errors = require("./errors");
@@ -35,8 +33,6 @@ var Client = /*#__PURE__*/function () {
 
   /** Axios client for tendermint rpc requests */
 
-  /** WebSocket event listener */
-
   /** Auth module */
 
   /** Bank module */
@@ -48,8 +44,8 @@ var Client = /*#__PURE__*/function () {
   /** Staking module */
 
   /** Tx module */
-
-  /** Gov module */
+  // /** Gov module */
+  // gov: modules.Gov;
 
   /** Slashing module */
 
@@ -64,14 +60,12 @@ var Client = /*#__PURE__*/function () {
     (0, _classCallCheck2["default"])(this, Client);
     (0, _defineProperty2["default"])(this, "config", void 0);
     (0, _defineProperty2["default"])(this, "rpcClient", void 0);
-    (0, _defineProperty2["default"])(this, "eventListener", void 0);
     (0, _defineProperty2["default"])(this, "auth", void 0);
     (0, _defineProperty2["default"])(this, "bank", void 0);
     (0, _defineProperty2["default"])(this, "keys", void 0);
     (0, _defineProperty2["default"])(this, "protobuf", void 0);
     (0, _defineProperty2["default"])(this, "staking", void 0);
     (0, _defineProperty2["default"])(this, "tx", void 0);
-    (0, _defineProperty2["default"])(this, "gov", void 0);
     (0, _defineProperty2["default"])(this, "slashing", void 0);
     (0, _defineProperty2["default"])(this, "distribution", void 0);
     (0, _defineProperty2["default"])(this, "utils", void 0);
@@ -87,8 +81,7 @@ var Client = /*#__PURE__*/function () {
       ConsPub: 'cosmosvalconspub'
     };
     this.config.rpcConfig.baseURL = this.config.node;
-    this.rpcClient = new _rpcClient.RpcClient(this.config.rpcConfig);
-    this.eventListener = new _eventListener.EventListener(this); //TODO (lvsc) there is an error 'Event... is not a constructor'
+    this.rpcClient = new _rpcClient.RpcClient(this.config.rpcConfig); // this.eventListener = new EventListener(this); //TODO (lvsc) there is an error 'Event... is not a constructor'
     // Modules
 
     this.utils = new modules.Utils(this);
@@ -96,8 +89,8 @@ var Client = /*#__PURE__*/function () {
     this.keys = new modules.Keys(this);
     this.tx = new modules.Tx(this);
     this.protobuf = new modules.Protobuf(this);
-    this.staking = new modules.Staking(this);
-    this.gov = new modules.Gov(this);
+    this.staking = new modules.Staking(this); // this.gov = new modules.Gov(this);
+
     this.slashing = new modules.Slashing(this);
     this.distribution = new modules.Distribution(this);
     this.auth = new modules.Auth(this);
