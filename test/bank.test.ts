@@ -62,21 +62,6 @@ describe('Bank Tests', () => {
 
   describe('Queries', () => {
     test(
-      'query account',
-      async () => {
-        await BaseTest.getClient()
-          .bank.queryAccount('cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc')
-          .then(res => {
-            console.log(res);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      },
-      timeout
-    );
-
-    test(
       'query Balance',
       async () => {
         await BaseTest.getClient()

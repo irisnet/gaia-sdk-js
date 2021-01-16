@@ -207,17 +207,17 @@ var Tx = /*#__PURE__*/function () {
                 }
 
                 _context2.next = 14;
-                return this.client.bank.queryAccount(keyObj.address);
+                return this.client.auth.queryAccount(keyObj.address);
 
               case 14:
                 account = _context2.sent;
 
-                if (account.account_number) {
-                  accountNumber = account.account_number;
+                if (account.accountNumber) {
+                  accountNumber = String(account.accountNumber) || '0';
                 }
 
                 if (account.sequence) {
-                  sequence = account.sequence;
+                  sequence = String(account.sequence) || '0';
                 }
 
               case 17:
