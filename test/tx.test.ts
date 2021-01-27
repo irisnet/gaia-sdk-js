@@ -6,8 +6,8 @@ let timeout = 9999;
 describe('Tx Tests', () => {
   const amount: types.Coin[] = [
     {
-      denom: 'ubig',
-      amount: '1',
+      denom: 'ubif',
+      amount: '100',
     },
   ];
 
@@ -15,8 +15,8 @@ describe('Tx Tests', () => {
     {
       type:types.TxType.MsgSend,
       value:{
-        from_address:'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
-        to_address:'cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc',
+        from_address:'iaa176dd0tgn38grpc8hpxfmwl6sl8jfmkneg8mkxr',
+        to_address:'iaa1eqvkfthtrr93g4p9qspp54w6dtjtrn27ar7rpw',
         amount
       }
     }
@@ -26,16 +26,16 @@ describe('Tx Tests', () => {
     {
       type:types.TxType.MsgSend,
       value:{
-        from_address:'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
-        to_address:'cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc',
+        from_address:'iaa176dd0tgn38grpc8hpxfmwl6sl8jfmkneg8mkxr',
+        to_address:'iaa1eqvkfthtrr93g4p9qspp54w6dtjtrn27ar7rpw',
         amount
       }
     },
     {
       type:types.TxType.MsgSend,
       value:{
-        from_address:'cosmos176dd0tgn38grpc8hpxfmwl6sl8jfmknea9m8yj',
-        to_address:'cosmos186qhtc62cf6ejlt3erw6zk28mgw8ne7gmthzkc',
+        from_address:'iaa176dd0tgn38grpc8hpxfmwl6sl8jfmkneg8mkxr',
+        to_address:'iaa1eqvkfthtrr93g4p9qspp54w6dtjtrn27ar7rpw',
         amount
       }
     }
@@ -44,19 +44,18 @@ describe('Tx Tests', () => {
   describe('watch/cold wallet', () => {
     test('watch/cold wallet tx', async () => {
       let baseTx = {...BaseTest.baseTx};
-      baseTx.account_number = '2';
-      baseTx.sequence = '27';
+      baseTx.account_number = 2;
+      baseTx.sequence = 40;
+      baseTx.chainId = BaseTest.getClient().config.chainId;
       // watch wallet
       let unsignedStdTx =  BaseTest.getClient().tx.buildTx(msgs, baseTx);
-      let unsignedTxModel = unsignedStdTx.getProtoModel();
-      let unsignedTxStr = Buffer.from(unsignedTxModel.serializeBinary()).toString('base64');
+      let unsignedTxStr = Buffer.from(unsignedStdTx.getData()).toString('base64');
       // cold wallet
-      let recover_unsigned_tx_model = BaseTest.getClient().protobuf.deserializeTx(unsignedTxStr, true);
-      let recover_unsigned_std_tx = BaseTest.getClient().tx.newStdTxFromProtoTxModel(recover_unsigned_tx_model);
-      let recover_signed_std_tx = await BaseTest.getClient().tx.sign(recover_unsigned_std_tx, baseTx);
-      let recover_signed_std_tx_str = Buffer.from(recover_signed_std_tx.getProtoModel().serializeBinary()).toString('base64'); 
+      let recover_unsigned_std_tx = BaseTest.getClient().tx.newStdTxFromTxData(unsignedTxStr);
+      let recover_signed_std_tx = await BaseTest.getClient().tx.sign(recover_unsigned_std_tx, baseTx, true);
+      let recover_signed_std_tx_str = Buffer.from(recover_signed_std_tx.getData()).toString('base64'); 
       // watch wallet
-      let signed_std_tx = BaseTest.getClient().tx.newStdTxFromProtoTxModel(BaseTest.getClient().protobuf.deserializeTx(recover_signed_std_tx_str, true));
+      let signed_std_tx = BaseTest.getClient().tx.newStdTxFromTxData(recover_signed_std_tx_str);
       await BaseTest.getClient().tx.broadcast(signed_std_tx, baseTx.mode).then(res=>{
         console.log(res);
       }).catch(error => {
