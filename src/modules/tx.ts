@@ -47,6 +47,16 @@ export class Tx {
   }
 
   /**
+   * generate StdTx from Tx Data
+   * @param  {[type]} TxData:string  base64 string form txBytes
+   * @return {[type]} unsignedTx
+   */
+  newStdTxFromTxData(TxDataString:string):types.ProtoTx{
+    const protoTxModel = this.client.protobuf.deserializeTx(TxDataString, true)
+    return  types.ProtoTx.newStdTxFromProtoTxModel(protoTxModel);
+  }
+
+  /**
    * Build, sign and broadcast the msgs
    * @param msgs Msgs to be sent
    * @param baseTx
@@ -104,6 +114,7 @@ export class Tx {
   async sign(
     stdTx: types.ProtoTx,
     baseTx: types.BaseTx,
+    offline:boolean = false
   ): Promise<types.ProtoTx> {
     if (is.empty(baseTx.from)) {
       throw new SdkError(`baseTx.from of the key can not be empty`);
@@ -120,13 +131,13 @@ export class Tx {
       throw new SdkError(`Key with name '${baseTx.from}' not found`,CODES.KeyNotFound);
     }
 
-    let accountNumber = baseTx.account_number??'0';
-    let sequence = baseTx.sequence || '0';
+    let accountNumber = baseTx.account_number;
+    let sequence = baseTx.sequence;
 
-    if (!baseTx.account_number || !baseTx.sequence) {
+    if ((!baseTx.account_number || !baseTx.sequence) && !offline) {
       const account = await this.client.auth.queryAccount(keyObj.address);
-      if ( account.accountNumber ) { accountNumber = String(account.accountNumber) || '0' }
-      if ( account.sequence ) { sequence = String(account.sequence) || '0' }
+      accountNumber = account.accountNumber??0;
+      sequence = account.sequence??0;
     }
     // Query account info from block chain
     const privKey = this.client.config.keyDAO.decrypt(keyObj.privateKey, baseTx.password);
@@ -135,9 +146,9 @@ export class Tx {
     }
     if (!stdTx.hasPubKey()) {
       const pubKey = Crypto.getPublicKeyFromPrivateKey(privKey, baseTx.pubkeyType);
-      stdTx.setPubKey(pubKey, sequence || undefined);
+      stdTx.setPubKey(pubKey, sequence??undefined);
     }
-    const signature = Crypto.generateSignature(stdTx.getSignDoc(accountNumber || undefined, this.client.config.chainId).serializeBinary(), privKey, baseTx.pubkeyType);
+    const signature = Crypto.generateSignature(stdTx.getSignDoc(accountNumber??undefined, baseTx.chainId || this.client.config.chainId).serializeBinary(), privKey, baseTx.pubkeyType);
     stdTx.addSignature(signature);
     return stdTx;
   }
@@ -245,7 +256,7 @@ export class Tx {
    */
   private broadcastTx(
     txBytes: Uint8Array,
-    method: string
+    method: string = types.RpcMethods.BroadcastTxAsync
   ): Promise<types.ResultBroadcastTxAsync> {
     // Only accepts 'broadcast_tx_sync' and 'broadcast_tx_async'
     if (

@@ -2,6 +2,7 @@
 import { TxModelCreator } from '../helper';
 import * as types from '../types';
 import { SdkError, CODES } from '../errors';
+import { Protobuf } from '../modules/protobuf';
 
 const Sha256 = require('sha256');
 
@@ -15,8 +16,8 @@ export class ProtoTx {
         memo:string,
         stdFee:types.StdFee,
         chain_id:string,
-        account_number?:string,
-        sequence?:string,
+        account_number?:number,
+        sequence?:number,
         publicKey?:string|types.Pubkey
     }, protoTxModel?:any) {
         if (!properties && !protoTxModel) {
@@ -60,9 +61,9 @@ export class ProtoTx {
      * @param {[string]} bech32/hex or object. if string, default Secp256k1
      * @param {optional [number]} sequence 
      */
-    setPubKey(pubkey:string|types.Pubkey, sequence?:string){
+    setPubKey(pubkey:string|types.Pubkey, sequence?:number){
         sequence = sequence || this.txData.sequence;
-        if (!sequence) {
+        if (typeof sequence == 'undefined') {
             throw new SdkError("sequence is empty",CODES.InvalidSequence);
         }
         let signerInfo = TxModelCreator.createSignerInfoModel(sequence, pubkey);
@@ -73,11 +74,11 @@ export class ProtoTx {
      * Get SignDoc for signature 
      * @returns SignDoc  protobuf.Tx.SignDoc 
      */
-    getSignDoc(account_number?:string, chain_id?:string):any{
+    getSignDoc(account_number?:number, chain_id?:string):any{
         if (!this.hasPubKey()) {
             throw new SdkError("please set pubKey",CODES.InvalidPubkey);
         }
-        if (!account_number && !this.txData.account_number) {
+        if ( typeof account_number == 'undefined' && typeof this.txData.account_number == 'undefined') {
             throw new SdkError("account_number is  empty",CODES.IncorrectAccountSequence);
         }
         if (!chain_id && !this.txData.chain_id) {
@@ -86,7 +87,7 @@ export class ProtoTx {
         let signDoc = new types.tx_tx_pb.SignDoc();
         signDoc.setBodyBytes(this.body.serializeBinary());
         signDoc.setAuthInfoBytes(this.authInfo.serializeBinary());
-        signDoc.setAccountNumber(String(account_number || this.txData.account_number));
+        signDoc.setAccountNumber(account_number??this.txData.account_number);
         signDoc.setChainId(chain_id || this.txData.chain_id);
         return signDoc;
     }
@@ -162,8 +163,7 @@ export class ProtoTx {
      *  get tx content
      * @returns tx info
      */
-    getDisplayContent():string{
-        let tx = this.getProtoModel();
-        return JSON.stringify(tx.toObject());
+    getDisplayContent():object{
+        return new Protobuf({} as any).deserializeTx(Buffer.from(this.getData()).toString('base64'));
     }
 }
