@@ -28,7 +28,6 @@ var _errors = require("../errors");
 /**
  * This module provides governance functionalities
  *
- * [More Details](https://www.irisnet.org/docs/features/governance.html)
  *
  * @category Modules
  * @since v0.17
@@ -53,147 +52,6 @@ var Gov = /*#__PURE__*/function () {
 
 
   (0, _createClass2["default"])(Gov, [{
-<<<<<<< HEAD
-    key: "queryProposal",
-    value: function queryProposal(proposalID) {
-      return this.client.rpcClient.abciQuery('custom/gov/proposal', {
-        ProposalID: String(proposalID)
-      });
-    }
-    /**
-     * Query proposals by conditions
-     * @param params
-     * @returns
-     * @since v0.17
-     */
-
-  }, {
-    key: "queryProposals",
-    value: function queryProposals(params) {
-      var queryParams = {};
-
-      if (params) {
-        queryParams = {
-          Voter: params.voter,
-          Depositor: params.depositor,
-          ProposalStatus: params.proposalStatus,
-          Limit: String(params.limit)
-        };
-      }
-
-      return this.client.rpcClient.abciQuery('custom/gov/proposals', queryParams);
-    }
-    /**
-     * Query a vote
-     * @param proposalID Identity of a proposal
-     * @param voter Bech32 voter address
-     * @returns
-     * @since v0.17
-     */
-
-  }, {
-    key: "queryVote",
-    value: function queryVote(proposalID, voter) {
-      return this.client.rpcClient.abciQuery('custom/gov/vote', {
-        ProposalID: String(proposalID),
-        Voter: voter
-      });
-    }
-    /**
-     * Query all votes of a proposal
-     * @param proposalID Identity of a proposal
-     * @returns
-     * @since v0.17
-     */
-
-  }, {
-    key: "queryVotes",
-    value: function queryVotes(proposalID) {
-      return this.client.rpcClient.abciQuery('custom/gov/votes', {
-        ProposalID: String(proposalID)
-      });
-    }
-    /**
-     * Query a deposit of a proposal
-     * @param proposalID Identity of a proposal
-     * @param depositor Bech32 depositor address
-     * @returns
-     * @since v0.17
-     */
-
-  }, {
-    key: "queryDeposit",
-    value: function queryDeposit(proposalID, depositor) {
-      return this.client.rpcClient.abciQuery('custom/gov/deposit', {
-        ProposalID: String(proposalID),
-        Depositor: depositor
-      });
-    }
-    /**
-     * Query all deposits of a proposal
-     * @param proposalID Identity of a proposal
-     * @returns
-     * @since v0.17
-     */
-
-  }, {
-    key: "queryDeposits",
-    value: function queryDeposits(proposalID) {
-      return this.client.rpcClient.abciQuery('custom/gov/deposits', {
-        ProposalID: String(proposalID)
-      });
-    }
-    /**
-     * Query the statistics of a proposal
-     * @param proposalID Identity of a proposal
-     * @returns
-     * @since v0.17
-     */
-
-  }, {
-    key: "queryTally",
-    value: function queryTally(proposalID) {
-      return this.client.rpcClient.abciQuery('custom/gov/tally', {
-        ProposalID: String(proposalID)
-      });
-    }
-    /**
-     * Submit a ParameterChangeProposal along with an initial deposit
-     *
-     * The proposer must deposit at least 30% of the [MinDeposit](https://www.irisnet.org/docs/features/governance.html#proposal-level) to submit a proposal.
-     *
-     * [Read about which parameters can be changed online](https://www.irisnet.org/docs/concepts/gov-params.html)
-     *
-     * @param title Title of the proposal
-     * @param description Description of the proposal
-     * @param initialDeposit Initial deposit of the proposal(at least 30% of minDeposit)
-     * @param params On-chain Parameter to be changed, eg. `[{"subspace":"mint","key":"Inflation","value":"0.05"}]`
-     * @param baseTx
-     * @returns
-     * @since v0.17
-     */
-    // async submitParameterChangeProposal(
-    //   title: string,
-    //   description: string,
-    //   initialDeposit: types.Coin[],
-    //   params: types.ChangeParameter[],
-    //   baseTx: types.BaseTx
-    // ): Promise<types.TxResult> {
-    //   const proposer = this.client.keys.show(baseTx.from);
-    //   const coins = await this.client.utils.toMinCoins(initialDeposit);
-    //   const msgs: types.Msg[] = [
-    //     new MsgSubmitParameterChangeProposal({
-    //       title,
-    //       description,
-    //       proposer,
-    //       initial_deposit: coins,
-    //       params,
-    //     }),
-    //   ];
-    //   return this.client.tx.buildAndSend(msgs, baseTx);
-    // }
-
-=======
     key: "submitProposal",
     value: function () {
       var _submitProposal = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(content, initial_deposit, baseTx) {
@@ -227,7 +85,6 @@ var Gov = /*#__PURE__*/function () {
 
       return submitProposal;
     }()
->>>>>>> develop
     /**
      * vote
      * @param proposal_id 
@@ -236,27 +93,7 @@ var Gov = /*#__PURE__*/function () {
      * @returns
      * @since v0.17
      */
-    // async submitPlainTextProposal(
-    //   title: string,
-    //   description: string,
-    //   initialDeposit: types.Coin[],
-    //   baseTx: types.BaseTx
-    // ): Promise<types.TxResult> {
-    //   const proposer = this.client.keys.show(baseTx.from);
-    //   const coins = await this.client.utils.toMinCoins(initialDeposit);
-    //   const msgs: types.Msg[] = [
-    //     new MsgSubmitPlainTextProposal({
-    //       title,
-    //       description,
-    //       proposer,
-    //       initial_deposit: coins,
-    //     }),
-    //   ];
-    //   return this.client.tx.buildAndSend(msgs, baseTx);
-    // }
 
-<<<<<<< HEAD
-=======
   }, {
     key: "vote",
     value: function () {
@@ -291,7 +128,6 @@ var Gov = /*#__PURE__*/function () {
 
       return vote;
     }()
->>>>>>> develop
     /**
      * deposit
      * @param proposal_id 
@@ -300,33 +136,7 @@ var Gov = /*#__PURE__*/function () {
      * @returns
      * @since v0.17
      */
-    // async submitCommunityTaxUsageProposal(
-    //   title: string,
-    //   description: string,
-    //   initialDeposit: types.Coin[],
-    //   usage: CommunityTaxUsageType,
-    //   destAddress: string,
-    //   percent: number,
-    //   baseTx: types.BaseTx
-    // ): Promise<types.TxResult> {
-    //   const proposer = this.client.keys.show(baseTx.from);
-    //   const coins = await this.client.utils.toMinCoins(initialDeposit);
-    //   const msgs: types.Msg[] = [
-    //     new MsgSubmitCommunityTaxUsageProposal({
-    //       title,
-    //       description,
-    //       proposer,
-    //       initial_deposit: coins,
-    //       usage: CommunityTaxUsageType[usage],
-    //       dest_address: destAddress,
-    //       percent: String(percent),
-    //     }),
-    //   ];
-    //   return this.client.tx.buildAndSend(msgs, baseTx);
-    // }
 
-<<<<<<< HEAD
-=======
   }, {
     key: "deposit",
     value: function () {
@@ -361,26 +171,11 @@ var Gov = /*#__PURE__*/function () {
 
       return deposit;
     }()
->>>>>>> develop
     /**
      * Proposal queries proposal details based on ProposalID.
      * @param proposal_id defines the unique id of the proposal.
      */
-    // async deposit(
-    //   proposalID: number,
-    //   amount: types.Coin[],
-    //   baseTx: types.BaseTx
-    // ): Promise<types.TxResult> {
-    //   const depositor = this.client.keys.show(baseTx.from);
-    //   const coins = await this.client.utils.toMinCoins(amount);
-    //   const msgs: types.Msg[] = [
-    //     new MsgDeposit(String(proposalID), depositor, coins),
-    //   ];
-    //   return this.client.tx.buildAndSend(msgs, baseTx);
-    // }
 
-<<<<<<< HEAD
-=======
   }, {
     key: "queryProposal",
     value: function queryProposal(proposal_id) {
@@ -466,37 +261,12 @@ var Gov = /*#__PURE__*/function () {
       request.setVoter(voter);
       return this.client.rpcClient.protoQuery('/cosmos.gov.v1beta1.Query/Vote', request, types.gov_query_pb.QueryVoteResponse);
     }
->>>>>>> develop
     /**
      * Votes queries votes of a given proposal.
      * @param proposal_id defines the unique id of the proposal.
      */
 
   }, {
-<<<<<<< HEAD
-    key: "vote",
-    value: function () {
-      var _vote = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(proposalID, option, baseTx) {
-        var voter, msgs;
-        return _regenerator["default"].wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                voter = this.client.keys.show(baseTx.from);
-                msgs = [new _gov.MsgVote(String(proposalID), voter, option)];
-                return _context.abrupt("return", this.client.tx.buildAndSend(msgs, baseTx));
-
-              case 3:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function vote(_x, _x2, _x3) {
-        return _vote.apply(this, arguments);
-=======
     key: "queryVotes",
     value: function queryVotes(proposal_id) {
       var page_number = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
@@ -523,7 +293,6 @@ var Gov = /*#__PURE__*/function () {
     value: function queryParams(params_type) {
       if (!params_type) {
         throw new _errors.SdkError("params_type can be one of 'voting', 'tallying' or 'deposit'");
->>>>>>> develop
       }
 
       var request = new types.gov_query_pb.QueryParamsRequest();

@@ -494,6 +494,25 @@ var Tx = /*#__PURE__*/function () {
             msg = new types.MsgFundCommunityPool(txMsg.value);
             break;
           }
+        //gov
+
+        case types.TxType.MsgSubmitProposal:
+          {
+            msg = new types.MsgSubmitProposal(txMsg.value);
+            break;
+          }
+
+        case types.TxType.MsgVote:
+          {
+            msg = new types.MsgVote(txMsg.value);
+            break;
+          }
+
+        case types.TxType.MsgDeposit:
+          {
+            msg = new types.MsgDeposit(txMsg.value);
+            break;
+          }
 
         default:
           {
