@@ -32,6 +32,21 @@ export const crypto_ed25519_keys_pb = require( './proto-types/cosmos/crypto/ed25
 export const crypto_sm2_keys_pb = require( './proto-types/cosmos/crypto/sm2/keys_pb');
 export const base_coin_pb = require('./proto-types/cosmos/base/v1beta1/coin_pb');
 export const signing_signing_pb = require('./proto-types/cosmos/tx/signing/v1beta1/signing_pb');
+export const gov_gov_pb = require( './proto-types/cosmos/gov/v1beta1/gov_pb');
+export const distribution_distribution_pb = require( './proto-types/cosmos/distribution/v1beta1/distribution_pb');
+export const params_params_pb = require( './proto-types/cosmos/params/v1beta1/params_pb');
+export const upgrade_upgrade_pb = require( './proto-types/cosmos/upgrade/v1beta1/upgrade_pb');
+export const slashing_slashing_pb = require('./proto-types/cosmos/slashing/v1beta1/slashing_pb');
+
+//ibc module
+export const lightclients_tendermint_tendermint_pb = require( './proto-types/ibc/lightclients/tendermint/v1/tendermint_pb');
+
+//confio module
+export const confio_proofs_pb = require( './proto-types/confio/proofs_pb');
+
+// google module
+export const google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
+export const google_protobuf_duration_pb = require('google-protobuf/google/protobuf/duration_pb.js');
 
 //any
 export const any_pb = require( './proto-types/google/protobuf/any_pb');
