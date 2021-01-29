@@ -35,8 +35,8 @@ export class Client {
   /** Tx module */
   tx: modules.Tx;
 
-  // /** Gov module */
-  // gov: modules.Gov;
+  /** Gov module */
+  gov: modules.Gov;
 
   /** Slashing module */
   slashing: modules.Slashing;
@@ -75,7 +75,7 @@ export class Client {
     this.tx = new modules.Tx(this);
     this.protobuf = new modules.Protobuf(this);
     this.staking = new modules.Staking(this);
-    // this.gov = new modules.Gov(this);
+    this.gov = new modules.Gov(this);
     this.slashing = new modules.Slashing(this);
     this.distribution = new modules.Distribution(this);
     this.auth = new modules.Auth(this);

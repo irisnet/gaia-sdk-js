@@ -22,6 +22,8 @@ export declare class Client {
     staking: modules.Staking;
     /** Tx module */
     tx: modules.Tx;
+    /** Gov module */
+    gov: modules.Gov;
     /** Slashing module */
     slashing: modules.Slashing;
     /** Distribution module */
