@@ -57,7 +57,7 @@ var Crypto = /*#__PURE__*/function () {
 
   (0, _createClass2["default"])(Crypto, null, [{
     key: "decodeAddress",
-    // secp256k1 privkey is 32 bytes
+    value: // secp256k1 privkey is 32 bytes
     //hdpath
 
     /**
@@ -65,7 +65,7 @@ var Crypto = /*#__PURE__*/function () {
      * @param address The bech32 address to decode
      * @returns The decoded address buffer
      */
-    value: function decodeAddress(address) {
+    function decodeAddress(address) {
       var decodeAddress = bech32.decode(address);
       return Buffer.from(bech32.fromWords(decodeAddress.words));
     }
@@ -301,7 +301,8 @@ var Crypto = /*#__PURE__*/function () {
 
       switch (publicKey.type) {
         case types.PubkeyType.ed25519:
-          throw new _errors.SdkError("not implement", _errors.CODES.Panic);
+          hash = _utils.Utils.sha256(publicKey.value).substr(0, 40);
+          break;
 
         case types.PubkeyType.sm2:
           hash = _utils.Utils.sha256(publicKey.value).substr(0, 40);
@@ -504,7 +505,7 @@ var Crypto = /*#__PURE__*/function () {
 
   }, {
     key: "getPrivateKeyFromMnemonic",
-
+    value:
     /**
      * Gets a private key from mnemonic words.
      * @param mnemonic The mnemonic phrase words
@@ -513,7 +514,7 @@ var Crypto = /*#__PURE__*/function () {
      * @param password A passphrase for generating the salt, according to bip39
      * @returns hexstring
      */
-    value: function getPrivateKeyFromMnemonic(mnemonic) {
+    function getPrivateKeyFromMnemonic(mnemonic) {
       var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var derive = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       var password = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
