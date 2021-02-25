@@ -1,7 +1,7 @@
 {
   "name": "@irisnet/gaia-sdk",
-  "version": "0.0.1",
-  "description": "gaia JavaScript SDK",
+  "version": "1.0.0-rc0",
+  "description": "Gaia JavaScript SDK",
   "main": "index.js",
   "typings": "src/index.ts",
   "types": "./dist/src",
