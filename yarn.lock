@@ -829,10 +829,10 @@
     "@babel/helper-validator-option" "^7.12.11"
     "@babel/plugin-transform-typescript" "^7.12.13"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.8.4":
-  version "7.12.13"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.13.tgz#0a21452352b02542db0ffb928ac2d3ca7cb6d66d"
-  integrity sha512-8+3UMPBrjFa/6TtKi/7sehPKqfAm4g6K+YQjyyFOLUTxzOngcRZTlAVY8sc2CORJYqdHQY8gRPHmn+qo15rCBw==
+"@babel/runtime@^7.14.0", "@babel/runtime@^7.8.4":
+  version "7.14.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.0.tgz#46794bc20b612c5f75e62dd071e24dfd95f1cbe6"
+  integrity sha512-JELkvo/DlpNdJ7dlyw/eY7E0suy5i5GQH+Vlxaq1nsNJ+H7f4Vtv3jMeCEgRhZZQFXTjldYfQgv2qmM6M1v5wA==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -5606,9 +5606,10 @@ slice-ansi@^2.1.0:
     astral-regex "^1.0.0"
     is-fullwidth-code-point "^2.0.0"
 
-"sm-crypto@git+https://github.com/bianjieai/sm-crypto-js.git#main":
+"sm-crypto@git+http://github.com/bianjieai/sm-crypto-js.git#main":
   version "0.2.1"
-  resolved "git+https://github.com/bianjieai/sm-crypto-js.git#def39a846c0b87fc27f6e63ee90d2149c2590a57"
+  uid def39a846c0b87fc27f6e63ee90d2149c2590a57
+  resolved "git+http://github.com/bianjieai/sm-crypto-js.git#def39a846c0b87fc27f6e63ee90d2149c2590a57"
   dependencies:
     bn.js "^4.11.6"
     jsbn "^1.1.0"
