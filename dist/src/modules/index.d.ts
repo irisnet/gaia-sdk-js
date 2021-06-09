@@ -10,3 +10,4 @@ export * from './distribution';
 export * from './utils';
 export * from './tendermint';
 export * from './protobuf';
+export * from './ibc';
