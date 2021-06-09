@@ -15,71 +15,117 @@ export class Client {
   config: DefaultClientConfig;
 
   /** Axios client for tendermint rpc requests */
-  rpcClient: RpcClient;
+  private _rpcClient?: RpcClient;
+  get rpcClient():RpcClient{
+    if (!this._rpcClient) {this._rpcClient = new RpcClient(this.config.rpcConfig)}
+    return this._rpcClient;
+  }
 
   /** Auth module */
-  auth: modules.Auth;
+  private _auth?: modules.Auth;
+  get auth(): modules.Auth{
+    if (!this._auth) {this._auth = new modules.Auth(this)}
+    return this._auth;
+  }
 
   /** Bank module */
-  bank: modules.Bank;
+  private _bank?: modules.Bank;
+  get bank():modules.Bank{
+    if (!this._bank) {this._bank = new modules.Bank(this)}
+    return this._bank;
+  }
 
   /** Key management module */
-  keys: modules.Keys;
+  private _keys?: modules.Keys;
+  get keys():modules.Keys{
+    if (!this._keys) {this._keys = new modules.Keys(this)}
+    return this._keys;
+  }
 
   /** Protobuf module */
-  protobuf: modules.Protobuf;
+  private _protobuf?: modules.Protobuf;
+  get protobuf():modules.Protobuf{
+    if (!this._protobuf) {this._protobuf = new modules.Protobuf(this)}
+    return this._protobuf;
+  }
 
   /** Staking module */
-  staking: modules.Staking;
+  private _staking?: modules.Staking;
+  get staking():modules.Staking{
+    if (!this._staking) {this._staking = new modules.Staking(this)}
+    return this._staking;
+  }
 
   /** Tx module */
-  tx: modules.Tx;
+  private _tx?: modules.Tx;
+  get tx():modules.Tx{
+    if (!this._tx) {this._tx = new modules.Tx(this)}
+    return this._tx;
+  }
 
   /** Gov module */
-  gov: modules.Gov;
+  private _gov?: modules.Gov;
+  get gov():modules.Gov{
+    if (!this._gov) {this._gov = new modules.Gov(this)}
+    return this._gov;
+  }
+
 
   /** Slashing module */
-  slashing: modules.Slashing;
+  private _slashing?: modules.Slashing;
+  get slashing(): modules.Slashing{
+    if (!this._slashing) {this._slashing = new modules.Slashing(this)}
+    return this._slashing;
+  }
 
   /** Distribution module */
-  distribution: modules.Distribution;
+  private _distribution?: modules.Distribution;
+  get distribution(): modules.Distribution{
+    if (!this._distribution) {this._distribution = new modules.Distribution(this)}
+    return this._distribution;
+  }
 
   /** Utils module */
-  utils: modules.Utils;
+  private _utils?: modules.Utils;
+  get utils(): modules.Utils{
+    if (!this._utils) {this._utils = new modules.Utils(this)}
+    return this._utils;
+  }
 
   /** Tendermint module */
-  tendermint: modules.Tendermint;
+  private _tendermint?: modules.Tendermint;
+  get tendermint(): modules.Tendermint{
+    if (!this._tendermint) {this._tendermint = new modules.Tendermint(this)}
+    return this._tendermint;
+  }
+
+  /** Ibc module */
+  private _ibc?: modules.Ibc;
+  get ibc():modules.Ibc{
+    if (!this._ibc) {this._ibc = new modules.Ibc(this)}
+    return this._ibc;
+  }
 
   /** Gaia SDK Constructor */
   constructor(config: DefaultClientConfig) {
     this.config = config;
     if (!this.config.rpcConfig) this.config.rpcConfig = {};
+    if (!this.config.bech32Prefix || !this.config.bech32Prefix.AccAddr) {
+      switch(this.config.chainNetwork){
+        case consts.ChainNetwork.Cosmos:
+        this.config.bech32Prefix = types.Bech32Prefix_Cosmos;
+        break;
+        case consts.ChainNetwork.Akash:
+        this.config.bech32Prefix = types.Bech32Prefix_Akash;
+        break;
+        case consts.ChainNetwork.Iris:
+        default:
+        this.config.bech32Prefix = types.Bech32Prefix_Cosmos;
+        break
+      }
+    }
 
-    this.config.bech32Prefix = {
-      AccAddr: 'cosmos',
-      AccPub: 'cosmospub',
-      ValAddr: 'cosmosvaloper',
-      ValPub: 'cosmosvaloperpub',
-      ConsAddr: 'cosmosvalcons',
-      ConsPub: 'cosmosvalconspub',
-    };
-      
     this.config.rpcConfig.baseURL = this.config.node;
-    this.rpcClient = new RpcClient(this.config.rpcConfig);
-    // this.eventListener = new EventListener(this); //TODO (lvsc) there is an error 'Event... is not a constructor'
-
-    // Modules
-    this.utils = new modules.Utils(this);
-    this.bank = new modules.Bank(this);
-    this.keys = new modules.Keys(this);
-    this.tx = new modules.Tx(this);
-    this.protobuf = new modules.Protobuf(this);
-    this.staking = new modules.Staking(this);
-    this.gov = new modules.Gov(this);
-    this.slashing = new modules.Slashing(this);
-    this.distribution = new modules.Distribution(this);
-    this.auth = new modules.Auth(this);
-    this.tendermint = new modules.Tendermint(this);    
 
     // Set default encrypt/decrypt methods
     if (!this.config.keyDAO.encrypt || !this.config.keyDAO.decrypt) {
@@ -114,6 +160,18 @@ export class Client {
    */
   withNetwork(network: consts.Network) {
     this.config.network = network;
+    return this;
+  }
+
+  /**
+   * Set Gaia chain-id
+   * Set Gaia network type
+   *
+   * @param network Gaia network type, mainnet / testnet
+   * @returns The SDK itself
+   */
+  withChainNetwork(chainNetwork: consts.ChainNetwork) {
+    this.config.chainNetwork = chainNetwork;
     return this;
   }
 
@@ -161,7 +219,7 @@ export class Client {
   withRpcConfig(rpcConfig: AxiosRequestConfig) {
     rpcConfig.baseURL = this.config.node;
     this.config.rpcConfig = rpcConfig;
-    this.rpcClient = new RpcClient(this.config.rpcConfig);
+    this._rpcClient = new RpcClient(this.config.rpcConfig);
     return this;
   }
 }
@@ -187,7 +245,7 @@ export interface ClientConfig {
   keyDAO?: KeyDAO;
 
   /** Bech32 prefix of the network, will be overwritten by network type */
-  bech32Prefix?: Bech32Prefix;
+  bech32Prefix?: types.Bech32Prefix;
 
   /** Axios request config for tendermint rpc requests */
   rpcConfig?: AxiosRequestConfig;
@@ -196,22 +254,24 @@ export interface ClientConfig {
 /** Default Gaia Client Config */
 export class DefaultClientConfig implements ClientConfig {
   node: string;
+  chainNetwork: consts.ChainNetwork;
   network: consts.Network;
   chainId: string;
   gas: string;
   fee: types.Coin;
   keyDAO: KeyDAO;
-  bech32Prefix: Bech32Prefix;
+  bech32Prefix: types.Bech32Prefix;
   rpcConfig: AxiosRequestConfig;
 
   constructor() {
     this.node = '';
     this.network = types.Network.Mainnet;
+    this.chainNetwork = types.ChainNetwork.Cosmos;
     this.chainId = '';
     this.gas = '100000';
     this.fee = { amount: '', denom: '' };
     this.keyDAO = new DefaultKeyDAOImpl();
-    this.bech32Prefix = {} as Bech32Prefix;
+    this.bech32Prefix = {} as types.Bech32Prefix;
     this.rpcConfig = { timeout: 2000 };
   }
 }
@@ -261,18 +321,6 @@ export interface KeyDAO {
    * @throws `SdkError` if decrypt failed
    */
   decrypt?(encrptedPrivKey: string, password: string): string;
-}
-
-/**
- * Bech32 Prefix
- */
-export interface Bech32Prefix {
-  AccAddr: string;
-  AccPub: string;
-  ValAddr: string;
-  ValPub: string;
-  ConsAddr: string;
-  ConsPub: string;
 }
 
 export class DefaultKeyDAOImpl implements KeyDAO {

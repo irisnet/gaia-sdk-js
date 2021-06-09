@@ -56,24 +56,12 @@ export enum TxType {
   MsgSetWithdrawAddress ="cosmos.distribution.v1beta1.MsgSetWithdrawAddress",
   MsgWithdrawValidatorCommission = "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission",
   MsgFundCommunityPool = "cosmos.distribution.v1beta1.MsgFundCommunityPool",
-  //coinswap
-  MsgAddLiquidity ="irismod.coinswap.MsgAddLiquidity",
-  MsgRemoveLiquidity ="irismod.coinswap.MsgRemoveLiquidity",
-  MsgSwapOrder ="irismod.coinswap.MsgSwapOrder",
-  //nft
-  MsgIssueDenom ="irismod.nft.MsgIssueDenom",
-  MsgTransferNFT ="irismod.nft.MsgTransferNFT",
-  MsgEditNFT ="irismod.nft.MsgEditNFT",
-  MsgMintNFT ="irismod.nft.MsgMintNFT",
-  MsgBurnNFT ="irismod.nft.MsgBurnNFT",
-  MsgIssueToken = 'irismod.token.MsgIssueToken',
-  MsgEditToken = 'irismod.token.MsgEditToken',
-  MsgMintToken = 'irismod.token.MsgMintToken',
-  MsgTransferTokenOwner = 'irismod.token.MsgTransferTokenOwner',
   //gov
   MsgSubmitProposal = "cosmos.gov.v1beta1.MsgSubmitProposal",
   MsgVote = "cosmos.gov.v1beta1.MsgVote",
   MsgDeposit = "cosmos.gov.v1beta1.MsgDeposit",
+  //ibc
+  MsgTransfer = "ibc.applications.transfer.v1.MsgTransfer"
 }
 
 /** 
@@ -142,4 +130,16 @@ export enum PubkeyType {
 export interface Tag {
   key: string;
   value: string;
+}
+
+/**
+ * Bech32 Prefix
+ */
+export interface Bech32Prefix {
+  AccAddr: string;
+  AccPub: string;
+  ValAddr: string;
+  ValPub: string;
+  ConsAddr: string;
+  ConsPub: string;
 }

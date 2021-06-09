@@ -10,6 +10,9 @@ export const staking_tx_pb = require( './proto-types/cosmos/staking/v1beta1/tx_p
 export const tx_tx_pb = require( './proto-types/cosmos/tx/v1beta1/tx_pb');
 export const vesting_tx_pb = require( './proto-types/cosmos/vesting/v1beta1/tx_pb');
 
+//ibc tx
+export const ibc_transfer_tx_pb= require( './proto-types/ibc/applications/transfer/v1/tx_pb');
+
 /***************QUERY***************/
 export const base_query_pagination_pb = require( './proto-types/cosmos/base/query/v1beta1/pagination_pb');
 //cosmos query
@@ -23,6 +26,10 @@ export const params_query_pb = require( './proto-types/cosmos/params/v1beta1/que
 export const slashing_query_pb = require( './proto-types/cosmos/slashing/v1beta1/query_pb');
 export const staking_query_pb = require( './proto-types/cosmos/staking/v1beta1/query_pb');
 export const upgrade_query_pb = require( './proto-types/cosmos/upgrade/v1beta1/query_pb');
+
+//ibc query
+export const ibc_transfer_query_pb= require( './proto-types/ibc/applications/transfer/v1/query_pb');
+export const ibc_channel_query_pb= require( './proto-types/ibc/core/channel/v1/query_pb');
 
 /***************MODULES***************/
 //cosmos module
@@ -38,15 +45,16 @@ export const params_params_pb = require( './proto-types/cosmos/params/v1beta1/pa
 export const upgrade_upgrade_pb = require( './proto-types/cosmos/upgrade/v1beta1/upgrade_pb');
 export const slashing_slashing_pb = require('./proto-types/cosmos/slashing/v1beta1/slashing_pb');
 
-//ibc module
-export const lightclients_tendermint_tendermint_pb = require( './proto-types/ibc/lightclients/tendermint/v1/tendermint_pb');
+// ibc module
+export const ibc_core_client_pb= require( './proto-types/ibc/core/client/v1/client_pb');
+// export const lightclients_tendermint_tendermint_pb = require( './proto-types/ibc/lightclients/tendermint/v1/tendermint_pb');
 
 //confio module
-export const confio_proofs_pb = require( './proto-types/confio/proofs_pb');
+// export const confio_proofs_pb = require( './proto-types/confio/proofs_pb');
 
 // google module
 export const google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
-export const google_protobuf_duration_pb = require('google-protobuf/google/protobuf/duration_pb.js');
+// export const google_protobuf_duration_pb = require('google-protobuf/google/protobuf/duration_pb.js');
 
 //any
 export const any_pb = require( './proto-types/google/protobuf/any_pb');
