@@ -89,21 +89,10 @@ exports.TxType = TxType;
   TxType["MsgSetWithdrawAddress"] = "cosmos.distribution.v1beta1.MsgSetWithdrawAddress";
   TxType["MsgWithdrawValidatorCommission"] = "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission";
   TxType["MsgFundCommunityPool"] = "cosmos.distribution.v1beta1.MsgFundCommunityPool";
-  TxType["MsgAddLiquidity"] = "irismod.coinswap.MsgAddLiquidity";
-  TxType["MsgRemoveLiquidity"] = "irismod.coinswap.MsgRemoveLiquidity";
-  TxType["MsgSwapOrder"] = "irismod.coinswap.MsgSwapOrder";
-  TxType["MsgIssueDenom"] = "irismod.nft.MsgIssueDenom";
-  TxType["MsgTransferNFT"] = "irismod.nft.MsgTransferNFT";
-  TxType["MsgEditNFT"] = "irismod.nft.MsgEditNFT";
-  TxType["MsgMintNFT"] = "irismod.nft.MsgMintNFT";
-  TxType["MsgBurnNFT"] = "irismod.nft.MsgBurnNFT";
-  TxType["MsgIssueToken"] = "irismod.token.MsgIssueToken";
-  TxType["MsgEditToken"] = "irismod.token.MsgEditToken";
-  TxType["MsgMintToken"] = "irismod.token.MsgMintToken";
-  TxType["MsgTransferTokenOwner"] = "irismod.token.MsgTransferTokenOwner";
   TxType["MsgSubmitProposal"] = "cosmos.gov.v1beta1.MsgSubmitProposal";
   TxType["MsgVote"] = "cosmos.gov.v1beta1.MsgVote";
   TxType["MsgDeposit"] = "cosmos.gov.v1beta1.MsgDeposit";
+  TxType["MsgTransfer"] = "ibc.applications.transfer.v1.MsgTransfer";
 })(TxType || (exports.TxType = TxType = {}));
 
 /** 

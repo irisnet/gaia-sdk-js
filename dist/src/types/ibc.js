@@ -7,7 +7,7 @@ var _typeof = require("@babel/runtime/helpers/typeof");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MsgMultiSend = exports.MsgSend = void 0;
+exports.MsgTransfer = void 0;
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
@@ -40,125 +40,78 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 /**
- * Msg for sending coins
+ * Msg for ibc Transfer
  *
  * @hidden
  */
-var MsgSend = /*#__PURE__*/function (_Msg) {
-  (0, _inherits2["default"])(MsgSend, _Msg);
+var MsgTransfer = /*#__PURE__*/function (_Msg) {
+  (0, _inherits2["default"])(MsgTransfer, _Msg);
 
-  var _super = _createSuper(MsgSend);
+  var _super = _createSuper(MsgTransfer);
 
-  function MsgSend(msg) {
+  function MsgTransfer(msg) {
     var _this;
 
-    (0, _classCallCheck2["default"])(this, MsgSend);
-    _this = _super.call(this, _types.TxType.MsgSend);
+    (0, _classCallCheck2["default"])(this, MsgTransfer);
+    _this = _super.call(this, _types.TxType.MsgTransfer);
     (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this), "value", void 0);
     _this.value = msg;
     return _this;
   }
 
-  (0, _createClass2["default"])(MsgSend, [{
+  (0, _createClass2["default"])(MsgTransfer, [{
     key: "getModel",
     value: function getModel() {
       var msg = new (this.constructor.getModelClass())();
-      msg.setFromAddress(this.value.from_address);
-      msg.setToAddress(this.value.to_address);
-      this.value.amount.forEach(function (item) {
-        msg.addAmount(_helper.TxModelCreator.createCoinModel(item.denom, item.amount));
-      });
+      msg.setSourcePort(this.value.source_port);
+      msg.setSourceChannel(this.value.source_channel);
+      msg.setToken(_helper.TxModelCreator.createCoinModel(this.value.token.denom, this.value.token.amount));
+      msg.setSender(this.value.sender);
+      msg.setReceiver(this.value.receiver);
+
+      if (this.value.timeout_height && this.value.timeout_height.revision_number && this.value.timeout_height.revision_height) {
+        var height = new pbs.ibc_core_client_pb.Height();
+        height.setRevisionNumber(this.value.timeout_height.revision_number);
+        height.setRevisionNumber(this.value.timeout_height.revision_height);
+        msg.setTimeoutHeight(height);
+      }
+
+      if (this.value.timeout_timestamp) {
+        msg.setTimeoutTimestamp(this.value.timeout_timestamp);
+      }
+
       return msg;
     }
   }, {
     key: "validate",
     value: function validate() {
-      if (!this.value.from_address) {
-        throw new _errors.SdkError("from_address is  empty");
+      if (!this.value.source_port) {
+        throw new _errors.SdkError("source_port is  empty");
       }
 
-      if (!this.value.to_address) {
-        throw new _errors.SdkError("to_address is  empty");
+      if (!this.value.source_channel) {
+        throw new _errors.SdkError("source_channel is  empty");
       }
 
-      if (!(this.value.amount && this.value.amount.length)) {
-        throw new _errors.SdkError("amount is  empty");
-      }
-    }
-  }], [{
-    key: "getModelClass",
-    value: function getModelClass() {
-      return pbs.bank_tx_pb.MsgSend;
-    }
-  }]);
-  return MsgSend;
-}(_types.Msg);
-/**
- * Msg for sending coins
- *
- * @hidden
- */
-
-
-exports.MsgSend = MsgSend;
-
-var MsgMultiSend = /*#__PURE__*/function (_Msg2) {
-  (0, _inherits2["default"])(MsgMultiSend, _Msg2);
-
-  var _super2 = _createSuper(MsgMultiSend);
-
-  function MsgMultiSend(msg) {
-    var _this2;
-
-    (0, _classCallCheck2["default"])(this, MsgMultiSend);
-    _this2 = _super2.call(this, _types.TxType.MsgMultiSend);
-    (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this2), "value", void 0);
-    _this2.value = msg;
-    return _this2;
-  }
-
-  (0, _createClass2["default"])(MsgMultiSend, [{
-    key: "getModel",
-    value: function getModel() {
-      var msg = new (this.constructor.getModelClass())();
-      this.value.inputs.forEach(function (item) {
-        var input = new pbs.bank_tx_pb.Input();
-        input.setAddress(item.address);
-        item.coins.forEach(function (coin) {
-          input.addCoins(_helper.TxModelCreator.createCoinModel(coin.denom, coin.amount));
-        });
-        msg.addInputs(input);
-      });
-      this.value.outputs.forEach(function (item) {
-        var output = new pbs.bank_tx_pb.Output();
-        output.setAddress(item.address);
-        item.coins.forEach(function (coin) {
-          output.addCoins(_helper.TxModelCreator.createCoinModel(coin.denom, coin.amount));
-        });
-        msg.addOutputs(output);
-      });
-      return msg;
-    }
-  }, {
-    key: "validate",
-    value: function validate() {
-      if (!this.value.inputs) {
-        throw new _errors.SdkError("inputs is empty");
+      if (!this.value.token) {
+        throw new _errors.SdkError("token is  empty");
       }
 
-      if (!this.value.outputs) {
-        throw new _errors.SdkError("outputs is  empty");
+      if (!this.value.receiver) {
+        throw new _errors.SdkError("receiver is  empty");
+      }
+
+      if (!this.value.timeout_height && !this.value.timeout_timestamp) {
+        throw new _errors.SdkError("there must be one timeout_height or timeout_timestamp");
       }
     }
   }], [{
     key: "getModelClass",
     value: function getModelClass() {
-      return pbs.bank_tx_pb.MsgMultiSend;
+      return pbs.ibc_transfer_query_pb.MsgTransfer;
     }
   }]);
-  return MsgMultiSend;
+  return MsgTransfer;
 }(_types.Msg);
-/** Base input and output struct */
 
-
-exports.MsgMultiSend = MsgMultiSend;
+exports.MsgTransfer = MsgTransfer;

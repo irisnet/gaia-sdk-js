@@ -104,6 +104,11 @@ export class Protobuf {
             messageModelClass = types.MsgDeposit.getModelClass();
             break;
         }
+        //ibc
+        case types.TxType.MsgTransfer: {
+            messageModelClass = types.MsgTransfer.getModelClass();
+            break;
+        }
         default: {
             throw new SdkError("not exist tx type",CODES.InvalidType);
         }

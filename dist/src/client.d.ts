@@ -9,29 +9,44 @@ export declare class Client {
     /** Gaia Client Config */
     config: DefaultClientConfig;
     /** Axios client for tendermint rpc requests */
-    rpcClient: RpcClient;
+    private _rpcClient?;
+    get rpcClient(): RpcClient;
     /** Auth module */
-    auth: modules.Auth;
+    private _auth?;
+    get auth(): modules.Auth;
     /** Bank module */
-    bank: modules.Bank;
+    private _bank?;
+    get bank(): modules.Bank;
     /** Key management module */
-    keys: modules.Keys;
+    private _keys?;
+    get keys(): modules.Keys;
     /** Protobuf module */
-    protobuf: modules.Protobuf;
+    private _protobuf?;
+    get protobuf(): modules.Protobuf;
     /** Staking module */
-    staking: modules.Staking;
+    private _staking?;
+    get staking(): modules.Staking;
     /** Tx module */
-    tx: modules.Tx;
+    private _tx?;
+    get tx(): modules.Tx;
     /** Gov module */
-    gov: modules.Gov;
+    private _gov?;
+    get gov(): modules.Gov;
     /** Slashing module */
-    slashing: modules.Slashing;
+    private _slashing?;
+    get slashing(): modules.Slashing;
     /** Distribution module */
-    distribution: modules.Distribution;
+    private _distribution?;
+    get distribution(): modules.Distribution;
     /** Utils module */
-    utils: modules.Utils;
+    private _utils?;
+    get utils(): modules.Utils;
     /** Tendermint module */
-    tendermint: modules.Tendermint;
+    private _tendermint?;
+    get tendermint(): modules.Tendermint;
+    /** Ibc module */
+    private _ibc?;
+    get ibc(): modules.Ibc;
     /** Gaia SDK Constructor */
     constructor(config: DefaultClientConfig);
     /**
@@ -48,6 +63,14 @@ export declare class Client {
      * @returns The SDK itself
      */
     withNetwork(network: consts.Network): this;
+    /**
+     * Set Gaia chain-id
+     * Set Gaia network type
+     *
+     * @param network Gaia network type, mainnet / testnet
+     * @returns The SDK itself
+     */
+    withChainNetwork(chainNetwork: consts.ChainNetwork): this;
     /**
      * Set Gaia chain-id
      *
@@ -94,19 +117,20 @@ export interface ClientConfig {
     /** Key DAO Implemention */
     keyDAO?: KeyDAO;
     /** Bech32 prefix of the network, will be overwritten by network type */
-    bech32Prefix?: Bech32Prefix;
+    bech32Prefix?: types.Bech32Prefix;
     /** Axios request config for tendermint rpc requests */
     rpcConfig?: AxiosRequestConfig;
 }
 /** Default Gaia Client Config */
 export declare class DefaultClientConfig implements ClientConfig {
     node: string;
+    chainNetwork: consts.ChainNetwork;
     network: consts.Network;
     chainId: string;
     gas: string;
     fee: types.Coin;
     keyDAO: KeyDAO;
-    bech32Prefix: Bech32Prefix;
+    bech32Prefix: types.Bech32Prefix;
     rpcConfig: AxiosRequestConfig;
     constructor();
 }
@@ -151,17 +175,6 @@ export interface KeyDAO {
      * @throws `SdkError` if decrypt failed
      */
     decrypt?(encrptedPrivKey: string, password: string): string;
-}
-/**
- * Bech32 Prefix
- */
-export interface Bech32Prefix {
-    AccAddr: string;
-    AccPub: string;
-    ValAddr: string;
-    ValPub: string;
-    ConsAddr: string;
-    ConsPub: string;
 }
 export declare class DefaultKeyDAOImpl implements KeyDAO {
     write(name: string, key: Wallet): void;

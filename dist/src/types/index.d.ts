@@ -16,3 +16,4 @@ export * from './validator';
 export * from './query-builder';
 export * from './protoTx';
 export * from './proto';
+export * from './ibc';
