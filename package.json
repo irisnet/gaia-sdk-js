@@ -50,7 +50,7 @@
     "ts-loader": "^6.2.2",
     "tslint": "^6.1.0",
     "typedoc": "^0.16.9",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.10"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
